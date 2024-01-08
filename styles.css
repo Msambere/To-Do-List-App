@@ -2,11 +2,17 @@
     margin:0px;
     padding:0px;
     box-sizing: border-box;
-    border: 1px dotted black;
+    
 }
 
 :root{
     font-size: 24px;
+
+    --dark-grey: #50514f;
+    --red: #f25f5c;
+    --yellow: #ffe066;
+    --blue: #247ba0;
+    --blue-green: #70c1b3;
 }
 
 #content{
@@ -14,11 +20,11 @@
     width: 100vw;
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 100px 1fr 50px;
+    grid-template-rows: 100px 1fr 20px;
     grid-template-areas: 
     "header header"
     "navbar main"
-    "footer footer";
+    "navbar footer";
 }
 
 .header{
@@ -26,50 +32,132 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background-color: var(--blue);
+    color: white;
+    box-shadow: 0rem .2rem .3rem black;
+}
+
+.ltbox{
+    width: 50vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.logo{
+    height: 100%;
+    border: none
+}
+
+.title{
+    margin-left: 20px;
+    border:none;
 }
 
 .header-right{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 8px;
+    margin-right: 10px;
 }
 
 .toggle-box{
     width: 75px;
     height: 25px;
     display: block;
-    background-color: #000;
+    background-color: white;
     border-radius: 1000px;
     cursor: pointer;
     position: relative;
     transition: 0.5s;
 }
+
 input[type="checkbox"]{
     display: none;
 }
+
 .circle{
     position: absolute;
     width: 25px;
     height: 20px;
     left: 0px;
-    background-color: #fff;
+    background-color: whitesmoke;
     border-radius: 1000px;
+    border: 1px solid var(--dark-grey) ;
     margin: 2px;
     transition: 0.5s;
-
 }
 
 .navBar{
     grid-area: navbar;
     display: flex;
     flex-direction: column;
-    
+    width: 20vw;
+    align-items: center;
+    background-color: var(--blue-green);
+    padding-top: 10px;
+    box-shadow: .2rem 0 .3rem black;
+}
+
+.navBtn{
+    width: 90%;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 8px;
+
+}
+
+.projectBtns-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    width: 80%;
+}
+
+.project-btn{
+    margin-bottom:10px;
+    border-radius:8px ;
 }
 
 .main{
+    margin: 15px;
     grid-area: main;
     display: flex;
     flex-direction: column;
+
     
+}
+
+.pHeader{
+    margin: 10px;
+}
+
+.list-display{
+    margin-left: 10px;
+}
+
+.todo{
+    margin-bottom: 5px;
+    padding: 5px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap:3px;
+
+}
+
+img.checkbox{
+    height: 25px;
+    width: 25px;
+}
+
+img.edit{
+    height: 25px;
+    width: 25px;
 }
 
 .footer{
@@ -77,6 +165,9 @@ input[type="checkbox"]{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    background-color: var(--dark-grey);
+    color: white;
+    font-size: 15px;
 }
 
 .todo{
@@ -99,6 +190,28 @@ input[type="checkbox"]{
 }
 
 
+.projectOverviews-container{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(350px, 1fr));
+    gap: 30px;
+    grid-auto-rows: auto;
+}
+
+.project-overview{
+    border: 1px solid var(--dark-grey);
+    border-radius: 3px;
+    box-shadow: .2rem .2rem .2rem black;
+}
+
+.project-overview h3{
+    padding: 8px;
+}
+
+.project-overview p{
+    margin-left: 50px;
+    padding: 8px;
+}
+
 .quad-display{
     display: grid;
     grid-template-columns: 50px 1fr 1fr;
@@ -113,6 +226,7 @@ input[type="checkbox"]{
 .quad-grid-label{
     font-size: 1.2rem;
     font-weight: 700;
+    text-align: center;
 }
 
 .rotate{
@@ -122,37 +236,40 @@ input[type="checkbox"]{
 
 .urgent{
     grid-area: urgent;
+    align-self: end;
 }
 
 .later{
     grid-area: later;
+    align-self: end;
 }
 
 .important{
     grid-area: important;
+    justify-self: right;
 }
 
 .quad1{
     grid-area: quad1;
+    background-color:rgba(211, 117, 117, .8);
 }
 
 .quad2{
     grid-area: quad2;
+    background-color:rgba(250, 226, 127, .8)
 }
 
 .unimportant{
     grid-area: unimportant;
+    justify-self: right;
 }
 
 .quad3{
     grid-area: quad3;
+    background-color:rgba(79, 182, 226, .8);
 }
 .quad4{
     grid-area: quad4;
+    background-color:rgba(129, 218, 203, .8)
 }
 
-.projectBtns-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: right;
-}
