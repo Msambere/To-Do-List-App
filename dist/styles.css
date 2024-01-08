@@ -34,7 +34,6 @@
     justify-content: space-between;
     background-color: var(--blue);
     color: white;
-    box-shadow: 0rem .2rem .3rem black;
 }
 
 .ltbox{
@@ -99,7 +98,7 @@ input[type="checkbox"]{
     align-items: center;
     background-color: var(--blue-green);
     padding-top: 10px;
-    box-shadow: .2rem 0 .3rem black;
+    
 }
 
 .navBtn{
@@ -138,15 +137,23 @@ input[type="checkbox"]{
 
 .list-display{
     margin-left: 10px;
+    width: 800px;
+}
+
+.tdList-container{
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
 }
 
 .todo{
-    margin-bottom: 5px;
+    width: 80%;
+    margin-bottom: 10px;
     padding: 5px;
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    gap:3px;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 30px 1fr 125px 100px 25px 25px;
+    gap:8px;
 
 }
 
@@ -170,10 +177,6 @@ img.edit{
     font-size: 15px;
 }
 
-.todo{
-    display: flex;
-    flex-direction: row;
-}
 
 .active{
     background-color: rgb(90, 89, 89);
@@ -191,8 +194,9 @@ img.edit{
 
 
 .projectOverviews-container{
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 30px;
     grid-auto-rows: auto;
 }
@@ -200,7 +204,7 @@ img.edit{
 .project-overview{
     border: 1px solid var(--dark-grey);
     border-radius: 3px;
-    box-shadow: .2rem .2rem .2rem black;
+    box-shadow: .1rem .1rem .2rem black;
 }
 
 .project-overview h3{
@@ -273,3 +277,8 @@ img.edit{
     background-color:rgba(129, 218, 203, .8)
 }
 
+
+/* Sources
+color palette: https://coolors.co/palette/50514f-f25f5c-ffe066-247ba0-70c1b3
+
+*/

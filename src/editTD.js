@@ -57,7 +57,7 @@ function changeCompleteProperty(tdIndex, tdList){
   } else{
       tdList[tdIndex]['status'] = '';
   };
-  return tdList[tdIndex]['status'];
+  return currentStatus;
 }
 
 

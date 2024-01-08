@@ -28,6 +28,16 @@ function generateProjectOverviewsDisplay(tdList){
     return container;
 };
 
+function taskGrammar(num){
+    let task = '';
+    if (num === 1){
+        task = 'task is';
+    }else {
+        task = 'tasks are';
+    };
+    return task
+}
+
 function generateStatsDiv(projectObject){
     let container = document.createElement('div');
     container.classList.add('project-overview');
@@ -37,19 +47,23 @@ function generateStatsDiv(projectObject){
     let projectStats = getProjectStats(projectObject['tdList']);
     
     let completeness = document.createElement('p');
-    completeness.textContent = `${projectStats['numCompleted']} / ${projectStats['numTds']} completed`;
+    completeness.textContent = `${projectStats['numCompleted']} / ${projectStats['numTds']} tasks completed`;
 
     let q1 = document.createElement('p');
-    q1.textContent = `${projectStats['numQ1']} task are urgent and important.`
+    let task1 = taskGrammar(projectStats['numQ1']);
+    q1.textContent = `${projectStats['numQ1']}  ${task1} urgent and important.`
     
     let q2 = document.createElement('p');
-    q2.textContent = `${projectStats['numQ2']} task are not urgent and important.`
+    let task2 = taskGrammar(projectStats['numQ2']);
+    q2.textContent = `${projectStats['numQ2']} ${task2} not urgent and important.`
     
     let q3 = document.createElement('p');
-    q3.textContent = `${projectStats['numQ3']} task are urgent and unimportant.`
+    let task3 = taskGrammar(projectStats['numQ3']);
+    q3.textContent = `${projectStats['numQ3']} ${task3} urgent and unimportant.`
     
     let q4 = document.createElement('p');
-    q4.textContent = `${projectStats['numQ4']} task are not urgent and unimportant.`
+    let task4 = taskGrammar(projectStats['numQ4']);
+    q4.textContent = `${projectStats['numQ4']} ${task4} not urgent and unimportant.`
     
     container.appendChild(titleDiv);
     container.appendChild(completeness);
