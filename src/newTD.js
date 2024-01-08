@@ -1,7 +1,7 @@
 import { mainTodoList, indexList } from "./applogic";
 import { Todo } from "./constructors";
 import { format, addDays } from "date-fns";
-
+import { createProjectTagList } from "./applogic";
 
 
 //New Todo
@@ -18,7 +18,7 @@ function createNewTodoForm(){
     const descriptRow = createFormRow('td-description', 'Description of Todo', 'text');
     const dateRow= createFormRow('td-dueDate', 'Due Date:', 'date');
     const priorityRow = createSelectFormRow('td-priority', 'Priority', ['High','Medium','Low']);
-    const projectRow = createSelectFormRow('td-projectTag', 'Project', ['Daily', 'Test1', 'Test2']);
+    const projectRow = createSelectFormRow('td-projectTag', 'Project', createProjectTagList(mainTodoList));
 
     const btnContainer = document.createElement('div')
     btnContainer.classList.add('form-buttons');

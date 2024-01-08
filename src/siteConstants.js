@@ -17,7 +17,7 @@ function createHeader(){
     logo.classList.add('logo');
     logo.src='../src/Images/logo.png'
 
-    const title = document.createElement('div')
+    const title = document.createElement('h1')
     title.classList.add('title')
     title.textContent = 'Check-It'
 
@@ -83,12 +83,14 @@ function createNavBar(){
 
     const projectBtn = document.createElement('button');
     projectBtn.classList.add('button');
+    projectBtn.classList.add('navBtn')
     projectBtn.setAttribute('id', 'projects');
     projectBtn.textContent = 'Projects';
             
 
     const newTD = document.createElement('button')
     newTD.classList.add('button');
+    newTD.classList.add('navBtn')
     newTD.setAttribute('id','new-todo-btn');
     newTD.textContent ='+ Add New Todo';
 

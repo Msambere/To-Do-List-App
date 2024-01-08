@@ -13,6 +13,7 @@ const allTasksBtn = document.getElementById('all');
 allTasksBtn.classList.toggle('active');
 initializeDisplay();
 
+
 const toggleBox = document.querySelector(".toggle-box");
 const circle = document.querySelector(".circle");
 const checkbox = document.getElementById("toggle-checkbox");
@@ -22,12 +23,12 @@ circle.addEventListener('click', ()=>switchDisplayMode());
 toggleBox.addEventListener('click', ()=>{
     if(checkbox.checked){
         circle.style.transform = "translateX(42px)";
-        circle.style.backgroundColor = "#000";
-        toggleBox.style.backgroundColor = "#fff";
+        //circle.style.backgroundColor = "white";
+        //toggleBox.style.backgroundColor = "#50514f";
     }else{
         circle.style.transform = "translateX(0px)";
-        circle.style.backgroundColor = "#fff";
-        toggleBox.style.backgroundColor = "#000";
+        //circle.style.backgroundColor = "#50514f";
+        //toggleBox.style.backgroundColor = "white";
     }
 });
 

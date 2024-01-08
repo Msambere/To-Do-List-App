@@ -19,6 +19,7 @@ function generateQuadDateSelector(){
 function generateProjectOverviewsDisplay(tdList){
     let container = document.createElement('div');
     container.classList.add('projectOverviews-container');
+    container.classList.add('list-display');
     let projectObjectList = createProjectTDLists(tdList)
     projectObjectList.forEach((object)=> {
         let div = generateStatsDiv(object);
@@ -30,13 +31,13 @@ function generateProjectOverviewsDisplay(tdList){
 function generateStatsDiv(projectObject){
     let container = document.createElement('div');
     container.classList.add('project-overview');
-    let titleDiv = document.createElement('div');
+    let titleDiv = document.createElement('h3');
     titleDiv.classList.add('overview-title');
     titleDiv.textContent = projectObject['projectTag'];
     let projectStats = getProjectStats(projectObject['tdList']);
     
     let completeness = document.createElement('p');
-    completeness.textContent = `${projectStats['numCompleted']} tasks out of  ${projectStats['numTds']} completed`;
+    completeness.textContent = `${projectStats['numCompleted']} / ${projectStats['numTds']} completed`;
 
     let q1 = document.createElement('p');
     q1.textContent = `${projectStats['numQ1']} task are urgent and important.`
@@ -126,7 +127,7 @@ function generateTdQuadDisplay(quadLists){
     unimportant.classList.add('quad-grid-label');
     unimportant.classList.add('rotate')
     unimportant.classList.add('unimportant');
-    unimportant.textContent = 'UNIMPORTANT';
+    unimportant.textContent = ' NOT IMPORTANT';
     container.appendChild(unimportant);
 
     return container;
@@ -167,7 +168,7 @@ function createTodoDiv(tdObject){
     let priorityDiv = document.createElement('div')
     priorityDiv.classList.add('priority-div');
     priorityDiv.textContent=tdObject.priority;
-    priorityDiv.style.backgroundColor= getPriorityColor(tdObject);
+    priorityDiv.style.color = getPriorityColor(tdObject);
         //create edit button
     let editBtn = document.createElement('img');
     editBtn.classList.add('edit');
@@ -203,9 +204,9 @@ function getPriorityColor(todoObject){
     if (priority === 'High'){
         return 'red';
     } else if (priority === 'Medium'){
-        return 'yellow';
-    }else if (priority ==="Low"){
         return 'blue';
+    }else if (priority ==="Low"){
+        return 'black';
     }else {
         return 'grey';
     };
