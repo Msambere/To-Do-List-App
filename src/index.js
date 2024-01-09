@@ -1,12 +1,11 @@
-//Imports
+// Imports
 import { createSite } from './siteConstants';
 import { mainTodoList, createDailyList, createThisWeekList, createTodayList, deleteTodo, addOverdueClass, createQuadLists, createProjectList } from './applogic';
 import { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusImage, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay } from './sitedynamic';
 import { addNewTodo } from './newTD';
 import { editTodoProperty, changeCompleteProperty } from './editTD';
-import { addDays } from 'date-fns';
 
-//Site initialization
+// Site initialization
 createSite();
 const main = document.getElementById('main');
 const allTasksBtn = document.getElementById('all');
@@ -23,18 +22,14 @@ circle.addEventListener('click', ()=>switchDisplayMode());
 toggleBox.addEventListener('click', ()=>{
     if(checkbox.checked){
         circle.style.transform = "translateX(42px)";
-        //circle.style.backgroundColor = "white";
-        //toggleBox.style.backgroundColor = "#50514f";
     }else{
         circle.style.transform = "translateX(0px)";
-        //circle.style.backgroundColor = "#50514f";
-        //toggleBox.style.backgroundColor = "white";
     }
 });
 
 
 
-//Button logic
+// Button logic
 const todayBtn = document.getElementById('todayBtn');
 todayBtn.addEventListener('click', (event) => {
     toggleNavBtns(event);
@@ -70,7 +65,7 @@ projectNavBtn.addEventListener('click', (event) => {
     main.appendChild(generateProjectHeader('All Projects'));
     main.appendChild(generateProjectOverviewsDisplay(mainTodoList));
     activateAllBtns();
-    //add code for clearing DOM and showing project Overviews
+    // add code for clearing DOM and showing project Overviews
     const projectBtns = document.querySelectorAll('.project-btn');
     projectBtns.forEach((btn) => btn.addEventListener('click', (event)=>{
         clearDomDisplay();
@@ -94,7 +89,7 @@ newTDBtn.addEventListener("click", () => {
 
 confirmBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    let newTdObject = addNewTodo();
+    const newTdObject = addNewTodo();
     displayNewTdDiv(newTdObject);
     activateAllBtns();
     document.getElementById('myForm').reset();
@@ -112,7 +107,7 @@ cancelBtn.addEventListener('click', () => {
 
 
 
-//Helper functions
+// Helper functions
 
 function switchDisplayMode(){
     main.classList.toggle('quad');
@@ -123,18 +118,18 @@ function switchDisplayMode(){
 
 
 function displayNewTdDiv(tdObject) {
-    let newDiv = createTodoDiv(tdObject);
-    let tdIndex = mainTodoList.findIndex(element => element.title === tdObject.title);
-    let divList = document.querySelectorAll('.todo')
-    if (tdIndex != 0) {
-        let siblingTitle = mainTodoList[tdIndex - 1].title;
+    const newDiv = createTodoDiv(tdObject);
+    const tdIndex = mainTodoList.findIndex(element => element.title === tdObject.title);
+    const divList = document.querySelectorAll('.todo')
+    if (tdIndex !== 0) {
+        const siblingTitle = mainTodoList[tdIndex - 1].title;
         divList.forEach((div) => {
             if (div.textContent.includes(siblingTitle)) {
                 div.after(newDiv);
             };
         });
     } else {
-        let secondTitle = mainTodoList[1].title;
+        const secondTitle = mainTodoList[1].title;
         divList.forEach((div) => {
             if (div.textContent.includes(secondTitle)) {
                 div.before(newDiv);
@@ -167,8 +162,8 @@ function activateEditBtns(){
     const editConfirmBtn = editTodoDialog.querySelector("#editConfirmBtn");
 
     editTdBtns.forEach((Btn) => Btn.addEventListener('click', (event) => {
-        let tdTitle = (event.target.parentElement.firstChild.nextSibling.textContent);
-        let tdIndex = mainTodoList.findIndex(tdObject => tdObject.title === tdTitle);
+        const tdTitle = (event.target.parentElement.firstChild.nextSibling.textContent);
+        const tdIndex = mainTodoList.findIndex(tdObject => tdObject.title === tdTitle);
         editTodoDialog.showModal();
         editConfirmBtn.addEventListener('click', (event) => {
             event.preventDefault();
@@ -188,24 +183,24 @@ function activateEditBtns(){
 
 
 function toggleComplete(event) {
-    let tdDiv = event.target.parentElement;
-    let tdIndex = tdDiv.getAttribute('data-index');
-    let newStatus = changeCompleteProperty(tdIndex, mainTodoList);
+    const tdDiv = event.target.parentElement;
+    const tdIndex = tdDiv.getAttribute('data-index');
+    const newStatus = changeCompleteProperty(tdIndex, mainTodoList);
     setTodoStatusImage(tdDiv, newStatus);  
 };
 
 
 function deleteTdDiv(event) {
-    let tdTitle = (event.target.parentElement.firstChild.nextSibling.textContent);
+    const tdTitle = (event.target.parentElement.firstChild.nextSibling.textContent);
     deleteTodo(tdTitle, mainTodoList);
-    let tdDiv = event.target.parentElement;
+    const tdDiv = event.target.parentElement;
     tdDiv.remove();
 };
 
 function toggleNavBtns(event) {
-    let oldBtn = document.querySelectorAll('.active');
+    const oldBtn = document.querySelectorAll('.active');
     oldBtn.forEach((element) => element.classList.toggle('active'))
-    let btn = event.target;
+    const btn = event.target;
     btn.classList.toggle('active');
 };
 
@@ -216,8 +211,8 @@ function clearDomDisplay() {
 };
 
 function refreshDisplay(){
-    let currentTab = document.querySelector('.active');
-    let header = currentTab.textContent;
+    const currentTab = document.querySelector('.active');
+    const header = currentTab.textContent;
     let content = '';
     switch (header){
         case 'Today':
@@ -247,8 +242,8 @@ function refreshDisplay(){
     activateAllBtns();
     const tdDivList = document.querySelectorAll('.todo');
     tdDivList.forEach((div)=> {
-        let tdIndex = div.getAttribute('data-index');
-        let status = mainTodoList[tdIndex]['status']
+        const tdIndex = div.getAttribute('data-index');
+        const {status} = mainTodoList[tdIndex]
         setTodoStatusImage(div, status);
     });
 };
