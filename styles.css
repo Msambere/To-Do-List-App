@@ -1,282 +1,273 @@
-*{
-    margin:0px;
-    padding:0px;
-    box-sizing: border-box;
-    
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-:root{
-    font-size: 24px;
+:root {
+  font-size: 24px;
 
-    --dark-grey: #50514f;
-    --red: #f25f5c;
-    --yellow: #ffe066;
-    --blue: #247ba0;
-    --blue-green: #70c1b3;
+  --dark-grey: #50514f;
+  --red: #f25f5c;
+  --yellow: #ffe066;
+  --blue: #247ba0;
+  --blue-green: #70c1b3;
 }
 
-#content{
-    height: 100vh;
-    width: 100vw;
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: 100px 1fr 20px;
-    grid-template-areas: 
+#content {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 100px 1fr 20px;
+  grid-template-areas:
     "header header"
     "navbar main"
     "navbar footer";
 }
 
-.header{
-    grid-area: header;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: var(--blue);
-    color: white;
+.header {
+  grid-area: header;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--blue);
+  color: white;
 }
 
-.ltbox{
-    width: 50vw;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-left: 10px;
+.ltbox {
+  width: 50vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 10px;
 }
 
-.logo{
-    height: 100%;
-    border: none
+.logo {
+  height: 100%;
+  border: none;
 }
 
-.title{
-    margin-left: 20px;
-    border:none;
+.title {
+  margin-left: 20px;
+  border: none;
 }
 
-.header-right{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 8px;
-    margin-right: 10px;
+.header-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 8px;
+  margin-right: 10px;
 }
 
-.toggle-box{
-    width: 75px;
-    height: 25px;
-    display: block;
-    background-color: white;
-    border-radius: 1000px;
-    cursor: pointer;
-    position: relative;
-    transition: 0.5s;
+.toggle-box {
+  width: 75px;
+  height: 25px;
+  display: block;
+  background-color: white;
+  border-radius: 1000px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.5s;
 }
 
-input[type="checkbox"]{
-    display: none;
+input[type="checkbox"] {
+  display: none;
 }
 
-.circle{
-    position: absolute;
-    width: 25px;
-    height: 20px;
-    left: 0px;
-    background-color: whitesmoke;
-    border-radius: 1000px;
-    border: 1px solid var(--dark-grey) ;
-    margin: 2px;
-    transition: 0.5s;
+.circle {
+  position: absolute;
+  width: 25px;
+  height: 20px;
+  left: 0px;
+  background-color: whitesmoke;
+  border-radius: 1000px;
+  border: 1px solid var(--dark-grey);
+  margin: 2px;
+  transition: 0.5s;
 }
 
-.navBar{
-    grid-area: navbar;
-    display: flex;
-    flex-direction: column;
-    width: 20vw;
-    align-items: center;
-    background-color: var(--blue-green);
-    padding-top: 10px;
-    
+.navBar {
+  grid-area: navbar;
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  align-items: center;
+  background-color: var(--blue-green);
+  padding-top: 10px;
 }
 
-.navBtn{
-    width: 90%;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    font-size: 1rem;
-    padding: 8px;
-
+.navBtn {
+  width: 90%;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 8px;
 }
 
-.projectBtns-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: right;
-    width: 80%;
+.projectBtns-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  width: 80%;
 }
 
-.project-btn{
-    margin-bottom:10px;
-    border-radius:8px ;
+.project-btn {
+  margin-bottom: 10px;
+  border-radius: 8px;
 }
 
-.main{
-    margin: 15px;
-    grid-area: main;
-    display: flex;
-    flex-direction: column;
-
-    
+.main {
+  margin: 15px;
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
 }
 
-.pHeader{
-    margin: 10px;
+.pHeader {
+  margin: 10px;
 }
 
-.list-display{
-    margin-left: 10px;
-    width: 800px;
+.list-display {
+  margin-left: 10px;
+  width: 800px;
 }
 
-.tdList-container{
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
+.tdList-container {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
 }
 
-.todo{
-    width: 80%;
-    margin-bottom: 10px;
-    padding: 5px;
-    background-color: white;
-    display: grid;
-    grid-template-columns: 30px 1fr 125px 100px 25px 25px;
-    gap:8px;
-
+.todo {
+  width: 80%;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 30px 1fr 125px 100px 25px 25px;
+  gap: 8px;
 }
 
-img.checkbox{
-    height: 25px;
-    width: 25px;
+img.checkbox {
+  height: 25px;
+  width: 25px;
 }
 
-img.edit{
-    height: 25px;
-    width: 25px;
+img.edit {
+  height: 25px;
+  width: 25px;
 }
 
-.footer{
-    grid-area: footer;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: var(--dark-grey);
-    color: white;
-    font-size: 15px;
+.footer {
+  grid-area: footer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: var(--dark-grey);
+  color: white;
+  font-size: 15px;
 }
 
-
-.active{
-    background-color: rgb(90, 89, 89);
-    color: white;
+.active {
+  background-color: rgb(90, 89, 89);
+  color: white;
 }
 
-.overdue{
-    color: rgb(221, 95, 95);
+.overdue {
+  color: rgb(221, 95, 95);
 }
 
-.complete{
-    text-decoration: line-through;
-    color: gray;
+.complete {
+  text-decoration: line-through;
+  color: gray;
 }
 
-
-.projectOverviews-container{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px;
-    grid-auto-rows: auto;
+.projectOverviews-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  grid-auto-rows: auto;
 }
 
-.project-overview{
-    border: 1px solid var(--dark-grey);
-    border-radius: 3px;
-    box-shadow: .1rem .1rem .2rem black;
+.project-overview {
+  border: 1px solid var(--dark-grey);
+  border-radius: 3px;
+  box-shadow: 0.1rem 0.1rem 0.2rem black;
 }
 
-.project-overview h3{
-    padding: 8px;
+.project-overview h3 {
+  padding: 8px;
 }
 
-.project-overview p{
-    margin-left: 50px;
-    padding: 8px;
+.project-overview p {
+  margin-left: 50px;
+  padding: 8px;
 }
 
-.quad-display{
-    display: grid;
-    grid-template-columns: 50px 1fr 1fr;
-    grid-template-rows: 50px 1fr 1fr;
-    grid-template-areas: 
-    '. urgent later'
-    'important quad1 quad2'
-    'unimportant quad3 quad4';
-    gap: 15px;
+.quad-display {
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr;
+  grid-template-rows: 50px 1fr 1fr;
+  grid-template-areas:
+    ". urgent later"
+    "important quad1 quad2"
+    "unimportant quad3 quad4";
+  gap: 15px;
 }
 
-.quad-grid-label{
-    font-size: 1.2rem;
-    font-weight: 700;
-    text-align: center;
+.quad-grid-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
 }
 
-.rotate{
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+.rotate {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }
 
-.urgent{
-    grid-area: urgent;
-    align-self: end;
+.urgent {
+  grid-area: urgent;
+  align-self: end;
 }
 
-.later{
-    grid-area: later;
-    align-self: end;
+.later {
+  grid-area: later;
+  align-self: end;
 }
 
-.important{
-    grid-area: important;
-    justify-self: right;
+.important {
+  grid-area: important;
+  justify-self: right;
 }
 
-.quad1{
-    grid-area: quad1;
-    background-color:rgba(211, 117, 117, .8);
+.quad1 {
+  grid-area: quad1;
+  background-color: rgba(211, 117, 117, 0.8);
 }
 
-.quad2{
-    grid-area: quad2;
-    background-color:rgba(250, 226, 127, .8)
+.quad2 {
+  grid-area: quad2;
+  background-color: rgba(250, 226, 127, 0.8);
 }
 
-.unimportant{
-    grid-area: unimportant;
-    justify-self: right;
+.unimportant {
+  grid-area: unimportant;
+  justify-self: right;
 }
 
-.quad3{
-    grid-area: quad3;
-    background-color:rgba(79, 182, 226, .8);
+.quad3 {
+  grid-area: quad3;
+  background-color: rgba(79, 182, 226, 0.8);
 }
-.quad4{
-    grid-area: quad4;
-    background-color:rgba(129, 218, 203, .8)
+.quad4 {
+  grid-area: quad4;
+  background-color: rgba(129, 218, 203, 0.8);
 }
-
 
 /* Sources
 color palette: https://coolors.co/palette/50514f-f25f5c-ffe066-247ba0-70c1b3
