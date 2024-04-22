@@ -202,7 +202,10 @@ function createTodoDiv(tdObject) {
   return todoDiv;
 }
 
-function setTodoStatusImage(tdDiv, currentStatus) {
+function setTodoStatusImage(tdDiv, tdList) {
+  const tdIndex = tdDiv.getAttribute('data-index');
+  const currentStatus = tdList[tdIndex].status
+  console.log(`setting image: ${currentStatus}`)
   if (currentStatus !== "complete") {
     tdDiv.classList.remove("complete");
     tdDiv.firstChild.src = "../src/Images/unchecked-box.png";

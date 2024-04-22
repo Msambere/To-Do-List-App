@@ -5,7 +5,7 @@ import { Todo } from "./constructors";
 
 
 // New Todo
-function createNewTodoForm() {
+function createNewTodoForm(tdList) {
   const dialog = document.createElement("dialog");
   dialog.classList.add("modal");
   dialog.setAttribute("id", "newTodoDialog");
@@ -29,7 +29,7 @@ function createNewTodoForm() {
   const projectRow = createSelectFormRow(
     "td-projectTag",
     "Project",
-    createProjectTagList(mainTodoList),
+    createProjectTagList(tdList),
   );
 
   const btnContainer = document.createElement("div");
@@ -58,7 +58,7 @@ function createNewTodoForm() {
   return dialog;
 }
 
-function addNewTodo() {
+function addNewTodo(tdList) {
   const tdTitle = document.getElementById("td-title").value;
   const tddescript = document.getElementById("td-description").value;
   const tddueDate = format(
@@ -67,18 +67,10 @@ function addNewTodo() {
   );
   const tdpriority = document.getElementById("td-priority").value;
   const tdprojectTag = document.getElementById("td-projectTag").value;
-  const newTodo = new Todo(
-    tdTitle,
-    tddescript,
-    tddueDate,
-    tdpriority,
-    [],
-    "",
-    tdprojectTag,
-  );
-  mainTodoList.push(newTodo);
-  mainTodoList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-  indexList(mainTodoList);
+  const newTodo = new Todo(tdTitle,tddescript, tddueDate,tdpriority,[],"",tdprojectTag,);
+  tdList.push(newTodo);
+  tdList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  indexList(tdList);
   return newTodo;
 }
 

@@ -1,16 +1,37 @@
 // Imports
 import { createSite } from './siteConstants';
-import { mainTodoList, createDailyList, createThisWeekList, createTodayList, deleteTodo, addOverdueClass, createQuadLists, createProjectList } from './applogic';
+import { createDailyList, createThisWeekList, createTodayList, deleteTodo, addOverdueClass, createQuadLists, createProjectList, mainTodoList } from './applogic';
 import { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusImage, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay } from './sitedynamic';
 import { addNewTodo } from './newTD';
 import { editTodoProperty, changeCompleteProperty } from './editTD';
 
 // Site initialization
-createSite();
+let currentTodoList = []
+if(localStorage.getItem("tdList")){
+    retrieveTdList();
+}else{
+    storeTdList(mainTodoList);
+} 
+createSite(currentTodoList);
 const main = document.getElementById('main');
 const allTasksBtn = document.getElementById('all');
 allTasksBtn.classList.toggle('active');
 initializeDisplay();
+console.table(currentTodoList)
+
+// Setting Local Storage
+function retrieveTdList(){
+    const currentStoredTodoList= JSON.parse(localStorage.getItem("tdList"));
+    currentTodoList = currentStoredTodoList;
+    return currentStoredTodoList;
+
+}; 
+function storeTdList(tdList){
+    localStorage.setItem("tdList",JSON.stringify(tdList));
+    retrieveTdList();
+}; 
+
+
 
 
 const toggleBox = document.querySelector(".toggle-box");
@@ -60,10 +81,10 @@ dailyBtn.addEventListener('click', (event) => {
 const projectNavBtn = document.getElementById('projects');
 projectNavBtn.addEventListener('click', (event) => {
     toggleNavBtns(event);
-    projectNavBtn.after(generateProjectButtons(mainTodoList));
+    projectNavBtn.after(generateProjectButtons(currentTodoList));
     clearDomDisplay();
     main.appendChild(generateProjectHeader('All Projects'));
-    main.appendChild(generateProjectOverviewsDisplay(mainTodoList));
+    main.appendChild(generateProjectOverviewsDisplay(currentTodoList));
     activateAllBtns();
     // add code for clearing DOM and showing project Overviews
     const projectBtns = document.querySelectorAll('.project-btn');
@@ -89,11 +110,12 @@ newTDBtn.addEventListener("click", () => {
 
 confirmBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    const newTdObject = addNewTodo();
+    const newTdObject = addNewTodo(currentTodoList);
     displayNewTdDiv(newTdObject);
     activateAllBtns();
     document.getElementById('myForm').reset();
     newTodoDialog.close();
+    storeTdList(currentTodoList);
 });
 
 cancelBtn.addEventListener('click', () => {
@@ -119,17 +141,17 @@ function switchDisplayMode(){
 
 function displayNewTdDiv(tdObject) {
     const newDiv = createTodoDiv(tdObject);
-    const tdIndex = mainTodoList.findIndex(element => element.title === tdObject.title);
+    const tdIndex = currentTodoList.findIndex(element => element.title === tdObject.title);
     const divList = document.querySelectorAll('.todo')
     if (tdIndex !== 0) {
-        const siblingTitle = mainTodoList[tdIndex - 1].title;
+        const siblingTitle = currentTodoList[tdIndex - 1].title;
         divList.forEach((div) => {
             if (div.textContent.includes(siblingTitle)) {
                 div.after(newDiv);
             };
         });
     } else {
-        const secondTitle = mainTodoList[1].title;
+        const secondTitle = currentTodoList[1].title;
         divList.forEach((div) => {
             if (div.textContent.includes(secondTitle)) {
                 div.before(newDiv);
@@ -163,14 +185,15 @@ function activateEditBtns(){
 
     editTdBtns.forEach((Btn) => Btn.addEventListener('click', (event) => {
         const tdTitle = (event.target.parentElement.firstChild.nextSibling.textContent);
-        const tdIndex = mainTodoList.findIndex(tdObject => tdObject.title === tdTitle);
+        const tdIndex = currentTodoList.findIndex(tdObject => tdObject.title === tdTitle);
         editTodoDialog.showModal();
         editConfirmBtn.addEventListener('click', (event) => {
             event.preventDefault();
-            editTodoProperty(tdIndex);
-            mainTodoList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+            editTodoProperty(tdIndex, currentTodoList);
+            currentTodoList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
             document.getElementById('editForm').reset();
             editTodoDialog.close();
+            storeTdList(currentTodoList);
             clearDomDisplay();
             refreshDisplay();
         });
@@ -184,17 +207,21 @@ function activateEditBtns(){
 
 function toggleComplete(event) {
     const tdDiv = event.target.parentElement;
+    console.log(tdDiv);
     const tdIndex = tdDiv.getAttribute('data-index');
-    const newStatus = changeCompleteProperty(tdIndex, mainTodoList);
-    setTodoStatusImage(tdDiv, newStatus);  
+    changeCompleteProperty(tdIndex, currentTodoList);
+    setTodoStatusImage(tdDiv, currentTodoList);  
+    storeTdList(currentTodoList);
+    console.table(currentTodoList);
 };
 
 
 function deleteTdDiv(event) {
     const tdTitle = (event.target.parentElement.firstChild.nextSibling.textContent);
-    deleteTodo(tdTitle, mainTodoList);
+    deleteTodo(tdTitle, currentTodoList);
     const tdDiv = event.target.parentElement;
     tdDiv.remove();
+    storeTdList(currentTodoList);
 };
 
 function toggleNavBtns(event) {
@@ -216,47 +243,48 @@ function refreshDisplay(){
     let content = '';
     switch (header){
         case 'Today':
-            content = createTodayList(mainTodoList);
+            content = createTodayList(currentTodoList);
             break;
         case 'This Week':
-            content = createThisWeekList(mainTodoList);
+            content = createThisWeekList(currentTodoList);
             break;
         case 'All Tasks':
-            content = mainTodoList;
+            content = currentTodoList;
             break;
         case 'Daily Tasks':
-            content = createDailyList(mainTodoList);
+            content = createDailyList(currentTodoList);
             break;
         default: // for project tabs
-            content = createProjectList(mainTodoList, header); 
+            content = createProjectList(currentTodoList, header); 
             break;
     };
     main.appendChild(generateProjectHeader(header));
     if (main.classList.contains('quad')) {
         main.appendChild(generateTdQuadDisplay(createQuadLists(content)));
-        addOverdueClass(mainTodoList);
+        addOverdueClass(currentTodoList);
     } else {
         main.appendChild(generateTdListDisplay(content));
-        addOverdueClass(mainTodoList);
+        addOverdueClass(currentTodoList);
     };
     activateAllBtns();
     const tdDivList = document.querySelectorAll('.todo');
     tdDivList.forEach((div)=> {
-        const tdIndex = div.getAttribute('data-index');
-        const {status} = mainTodoList[tdIndex]
-        setTodoStatusImage(div, status);
+        setTodoStatusImage(div, currentTodoList);
     });
 };
 
 function initializeDisplay(){
     main.appendChild(generateProjectHeader('All tasks'));
     if (main.classList.contains('quad')) {
-        main.appendChild(generateTdQuadDisplay(createQuadLists(mainTodoList)));
-        addOverdueClass(mainTodoList);
+        main.appendChild(generateTdQuadDisplay(createQuadLists(currentTodoList)));
     } else {
-        main.appendChild(generateTdListDisplay(mainTodoList));
-        addOverdueClass(mainTodoList);
+        main.appendChild(generateTdListDisplay(currentTodoList));
     };
+    addOverdueClass(currentTodoList);
     activateAllBtns();
+    const tdDivList = document.querySelectorAll('.todo');
+    tdDivList.forEach((div)=> {
+        setTodoStatusImage(div, currentTodoList);
+    });
 };
  

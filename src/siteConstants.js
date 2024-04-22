@@ -114,12 +114,12 @@ function createFooter() {
   return footer;
 }
 
-function createSite() {
+function createSite(tdList) {
   content.appendChild(createHeader());
   content.appendChild(createNavBar());
   content.appendChild(createMainDiv());
   content.appendChild(createFooter());
-  content.appendChild(createNewTodoForm());
+  content.appendChild(createNewTodoForm(tdList));
   content.appendChild(editTodoForm());
 }
 

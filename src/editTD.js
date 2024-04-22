@@ -1,7 +1,6 @@
-import { mainTodoList } from "./applogic";
-import { format } from "date-fns";
 
-//New Todo
+
+// New Todo
 function editTodoForm() {
   const dialog = document.createElement("dialog");
   dialog.classList.add("modal");
@@ -44,25 +43,27 @@ function editTodoForm() {
   return dialog;
 }
 
-function editTodoProperty(tdIndex) {
-  let editProperty = document.getElementById("td-property").value;
-  let newValue = document.getElementById("newValue").value;
-  mainTodoList[tdIndex][editProperty] = newValue;
-  let editedTd = mainTodoList[tdIndex];
+function editTodoProperty(tdIndex, tdList) {
+  const editProperty = document.getElementById("td-property").value;
+  const newValue = document.getElementById("newValue").value;
+  tdList[tdIndex][editProperty] = newValue;
+  const editedTd = tdList[tdIndex];
   return editedTd;
 }
 
 function changeCompleteProperty(tdIndex, tdList) {
-  let currentStatus = tdList[tdIndex]["status"];
-  if (currentStatus === "") {
-    tdList[tdIndex]["status"] = "complete";
+  const currentStatus = tdList[tdIndex].status
+  console.log(`Original Status: ${currentStatus}`)
+  if (tdList[tdIndex].status === "") {
+    tdList[tdIndex].status = "complete";
   } else {
-    tdList[tdIndex]["status"] = "";
+    tdList[tdIndex].status = "";
   }
-  return currentStatus;
+  console.log(`New status: ${tdList[tdIndex].status}`)
+  return tdList[tdIndex].status
 }
 
-//helper functions
+// helper functions
 function createFormRow(id, title, iType) {
   const formRow = document.createElement("div");
   formRow.classList.add("form-row");
@@ -94,7 +95,7 @@ function createSelectFormRow(id, title, optionsList) {
   select.setAttribute("name", id);
 
   optionsList.forEach((option) => {
-    let currentOption = document.createElement("option");
+    const currentOption = document.createElement("option");
     currentOption.textContent = option;
     select.appendChild(currentOption);
   });
