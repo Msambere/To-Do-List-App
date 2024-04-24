@@ -1,8 +1,7 @@
 import { format, addDays } from "date-fns";
-import { mainTodoList, indexList, createProjectTagList } from "./applogic";
+import { createProjectTagList, indexList } from "./listManagment";
 import { Todo } from "./constructors";
-
-
+import { mainTodoList } from "./testTDList";
 
 // New Todo
 function createNewTodoForm(tdList) {
@@ -15,22 +14,11 @@ function createNewTodoForm(tdList) {
   form.setAttribute("id", "myForm");
 
   const titleRow = createFormRow("td-title", "Title of Todo", "text");
-  const descriptRow = createFormRow(
-    "td-description",
-    "Description of Todo",
-    "text",
-  );
+  const descriptRow = createFormRow("td-description", "Description of Todo", "text");
   const dateRow = createFormRow("td-dueDate", "Due Date:", "date");
-  const priorityRow = createSelectFormRow("td-priority", "Priority", [
-    "High",
-    "Medium",
-    "Low",
-  ]);
-  const projectRow = createSelectFormRow(
-    "td-projectTag",
-    "Project",
-    createProjectTagList(tdList),
-  );
+  const priorityRow = createSelectFormRow("td-priority", "Priority", ["High", "Medium", "Low"]);
+  console.log(tdList);
+  const projectRow = createSelectFormRow("td-projectTag", "Project", createProjectTagList(tdList));
 
   const btnContainer = document.createElement("div");
   btnContainer.classList.add("form-buttons");
@@ -61,41 +49,14 @@ function createNewTodoForm(tdList) {
 function addNewTodo(tdList) {
   const tdTitle = document.getElementById("td-title").value;
   const tddescript = document.getElementById("td-description").value;
-  const tddueDate = format(
-    addDays(document.getElementById("td-dueDate").value, 1),
-    "M-dd-y",
-  );
+  const tddueDate = format(addDays(document.getElementById("td-dueDate").value, 1), "M-dd-y");
   const tdpriority = document.getElementById("td-priority").value;
   const tdprojectTag = document.getElementById("td-projectTag").value;
-  const newTodo = new Todo(tdTitle,tddescript, tddueDate,tdpriority,[],"",tdprojectTag,);
+  const newTodo = new Todo(tdTitle, tddescript, tddueDate, tdpriority, [], "", tdprojectTag);
   tdList.push(newTodo);
   tdList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
   indexList(tdList);
   return newTodo;
-}
-
-function addNestedTodo(
-  index,
-  title,
-  description,
-  dueDate,
-  priority,
-  todos,
-  notes,
-  projectTag,
-) {
-  const nestedTodo = new Todo(
-    title,
-    description,
-    dueDate,
-    priority,
-    todos,
-    notes,
-    projectTag,
-  );
-  const nestedTdList = mainTodoList[index].todos;
-  nestedTdList.push(nestedTodo);
-  // tdObject.todos.sort((a,b)=>a.dueDate-b.dueDate);
 }
 
 // helper functions

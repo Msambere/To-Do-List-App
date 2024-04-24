@@ -7,7 +7,33 @@
     <title>To-Do App</title>
   </head>
   <body>
-    <div class="content" id="content"></div>
+    <div class="content" id="content">
+      <div class="header">
+        <div class="ltbox">
+          <img src="../src/Images/logo.png" alt="" class="logo" />
+          <h1 class="title">Check-It</h1>
+        </div>
+        <div class="header-right">
+          <div class="userDisplay">Username and avatar go here</div>
+          <label for="" class="toggle-box">
+            <input type="checkbox" id="toggle-checkbox" />
+            <div class="circle"></div>
+          </label>
+        </div>
+      </div>
+      <div class="navBar">
+        <button class="button navBtn" id="todayBtn">Today</button>
+        <button class="button navBtn" id="weekly">This Week</button>
+        <button class="button navBtn" id="all">All Tasks</button>
+        <button class="button navBtn" id="daily">Daily Tasks</button>
+        <button class="button navBtn" id="projects">Projects</button>
+        <div class="projectBtns-container" id="PBContainer"></div>
+        <button class="button navBtn" id="new-todo-btn">+ Add New Todo</button>
+      </div>
+      <div class="main" id="main"></div>
+      <div class="footer">made by MsAmberE</div>
+    </div>
+
     <script src="main.js"></script>
   </body>
 </html>

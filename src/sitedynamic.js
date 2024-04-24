@@ -1,8 +1,4 @@
-import {
-  createProjectTagList,
-  createProjectTDLists,
-  getProjectStats,
-} from "./applogic";
+import { createProjectTagList, createProjectTDLists, getProjectStats } from "./listManagment";
 
 function generateQuadDateSelector() {
   const container = document.createElement("div");
@@ -80,17 +76,15 @@ function generateStatsDiv(projectObject) {
 }
 
 function generateProjectButtons(tdList) {
-  const container = document.createElement("div");
-  container.classList.add("projectBtns-container");
+  const PBContainer = document.getElementById("PBContainer");
   const projectTagList = createProjectTagList(tdList);
   projectTagList.forEach((tag) => {
     const btn = document.createElement("button");
     btn.classList.add("button");
     btn.classList.add("project-btn");
     btn.textContent = tag;
-    container.appendChild(btn);
+    PBContainer.appendChild(btn);
   });
-  return container;
 }
 
 function generateProjectHeader(title) {
@@ -117,7 +111,7 @@ function generateTdQuadDisplay(quadLists) {
   container.classList.add("quad-container");
   for (let i = 1; i < 5; i++) {
     const newQuad = createQuadContainer(quadLists[i - 1]);
-    newQuad.classList.add(`quad${  i}`);
+    newQuad.classList.add(`quad${i}`);
     container.appendChild(newQuad);
   }
 
@@ -203,9 +197,8 @@ function createTodoDiv(tdObject) {
 }
 
 function setTodoStatusImage(tdDiv, tdList) {
-  const tdIndex = tdDiv.getAttribute('data-index');
-  const currentStatus = tdList[tdIndex].status
-  console.log(`setting image: ${currentStatus}`)
+  const tdIndex = tdDiv.getAttribute("data-index");
+  const currentStatus = tdList[tdIndex].status;
   if (currentStatus !== "complete") {
     tdDiv.classList.remove("complete");
     tdDiv.firstChild.src = "../src/Images/unchecked-box.png";
@@ -216,26 +209,19 @@ function setTodoStatusImage(tdDiv, tdList) {
 }
 
 function getPriorityColor(todoObject) {
-  const {priority} = todoObject;
+  const { priority } = todoObject;
   if (priority === "High") {
     return "red";
-  } if (priority === "Medium") {
+  }
+  if (priority === "Medium") {
     return "blue";
-  } if (priority === "Low") {
+  }
+  if (priority === "Low") {
     return "black";
-  } 
-    return "grey";
-  
+  }
+  return "grey";
 }
 
 // Exports
 
-export {
-  generateTdListDisplay,
-  generateProjectHeader,
-  createTodoDiv,
-  setTodoStatusImage,
-  generateTdQuadDisplay,
-  generateProjectButtons,
-  generateProjectOverviewsDisplay,
-};
+export { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusImage, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay };
