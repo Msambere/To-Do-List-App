@@ -164,6 +164,7 @@ function createTodoDiv(tdObject) {
   const statusBox = document.createElement("img");
   statusBox.classList.add("checkbox");
   statusBox.src = "../src/Images/unchecked-box.png";
+  statusBox.alt = "checkbox";
   // create title div/button to expand
   const todoTitle = document.createElement("div");
   todoTitle.classList.add("todo-title");
@@ -181,10 +182,12 @@ function createTodoDiv(tdObject) {
   const editBtn = document.createElement("img");
   editBtn.classList.add("edit");
   editBtn.src = "../src/Images/pencil.png";
+  editBtn.alt = "edit button";
   // create delete button
   const deleteBtn = document.createElement("img");
   deleteBtn.classList.add("delete");
   deleteBtn.src = "../src/Images/delete.png";
+  deleteBtn.alt = "delete button";
   // append elements to container
   todoDiv.appendChild(statusBox);
   todoDiv.appendChild(todoTitle);
