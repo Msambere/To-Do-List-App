@@ -32,6 +32,40 @@
       </div>
       <div class="main" id="main"></div>
       <div class="footer">made by MsAmberE</div>
+      <dialog class="modal" id="newToDoDialog">
+        <form method="dialog" id="myForm">
+          <div class="form-row">
+            <label for="td-title">Title of Todo</label>
+            <input type="text" name="td-title" id="td-title" />
+          </div>
+          <div class="form-row">
+            <label for="td-description">Description of Todo</label>
+            <input type="text" name="td-description" id="td-description" />
+          </div>
+          <div class="form-row">
+            <label for="td-dueDate">Due Date:</label>
+            <input type="date" name="td-dueDate" id="td-dueDate" />
+          </div>
+          <div class="form-row">
+            <label for="td-priority">Priority</label>
+            <select name="td-priority" id="td-priority">
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="td-projectTag">Project</label>
+            <input list="projectTag-options" name="td-projectTag" id="td-projectTag" type="text">
+              <datalist id="projectTag-options" ></datalist>
+            </input>
+          </div>
+          <div class="form-buttons">
+            <button id="cancelBtn" value="cancel" formmethod="dialog">Cancel</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+          </div>
+        </form>
+      </dialog>
     </div>
 
     <script src="main.js"></script>
