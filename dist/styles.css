@@ -79,12 +79,6 @@
   transition: 0.5s;
 }
 
-#toggle-checkbox {
-  height: 25px;
-  width: 75px;
-  display: none;
-}
-
 .circle {
   position: absolute;
   width: 35px;
@@ -255,12 +249,12 @@ img.edit {
 
 .quad1 {
   grid-area: quad1;
-  background-color: rgba(211, 117, 117, 0.8);
+  border: 20px solid rgba(211, 117, 117, 0.8);
 }
 
 .quad2 {
   grid-area: quad2;
-  background-color: rgba(250, 226, 127, 0.8);
+  border: 20px solid rgba(250, 226, 127, 0.8);
 }
 
 .unimportant {
@@ -270,11 +264,11 @@ img.edit {
 
 .quad3 {
   grid-area: quad3;
-  background-color: rgba(79, 182, 226, 0.8);
+  border: 20px solid rgba(79, 182, 226, 0.8);
 }
 .quad4 {
   grid-area: quad4;
-  background-color: rgba(129, 218, 203, 0.8);
+  border: 20px solid rgba(129, 218, 203, 0.8);
 }
 
 /* Sources
