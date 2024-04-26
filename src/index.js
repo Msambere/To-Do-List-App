@@ -40,14 +40,22 @@ const toggleBox = document.querySelector(".toggle-box");
 const circle = document.querySelector(".circle");
 const checkbox = document.getElementById("toggle-checkbox");
 
-circle.addEventListener("click", () => switchDisplayMode());
-
-toggleBox.addEventListener("click", () => {
-  if (checkbox.checked) {
-    circle.style.transform = "translateX(42px)";
+circle.addEventListener("click", () => {
+  switchDisplayMode();
+  if (main.classList.contains("quad")) {
+    circle.style.transform = "translateX(35px)";
   } else {
     circle.style.transform = "translateX(0px)";
   }
+});
+
+toggleBox.addEventListener("click", () => {
+  console.log(checkbox.checked);
+  /* if (checkbox.checked) {
+    circle.style.transform = "translateX(35px)";
+  } else {
+    circle.style.transform = "translateX(0px)";
+  } */
 });
 
 // DRY Button logic
@@ -85,6 +93,7 @@ projectNavBtn.addEventListener("click", (event) => {
 
 const newTDBtn = document.getElementById("new-todo-btn");
 const newTodoDialog = document.getElementById("newToDoDialog");
+const myForm = document.getElementById("myForm");
 const cancelBtn = document.getElementById("cancelBtn");
 const confirmBtn = document.getElementById("confirmBtn");
 
@@ -98,7 +107,7 @@ confirmBtn.addEventListener("click", (event) => {
   const newTdObject = addNewTodo(currentTodoList);
   displayNewTdDiv(newTdObject);
   activateAllBtns();
-  document.getElementById("myForm").reset();
+  myForm.reset();
   newTodoDialog.close();
   storeTdList(currentTodoList);
   addOverdueClass(currentTodoList);
@@ -156,20 +165,23 @@ function activateCheckBoxes() {
 
 function activateEditBtns() {
   const editTdBtns = document.querySelectorAll(".edit");
-  const editTodoDialog = document.getElementById("editTodoDialog");
-  const editCancelBtn = editTodoDialog.querySelector("#editCancelBtn");
-  const editConfirmBtn = editTodoDialog.querySelector("#editConfirmBtn");
+  const editTodoDialog = document.getElementById("editToDoDialog");
+  const editForm = document.getElementById("editForm");
+  const editCancelBtn = document.querySelector("#editCancelBtn");
+  const editConfirmBtn = document.querySelector("#editConfirmBtn");
 
   editTdBtns.forEach((Btn) =>
     Btn.addEventListener("click", (event) => {
       const tdTitle = event.target.parentElement.firstChild.nextSibling.textContent;
       const tdIndex = currentTodoList.findIndex((tdObject) => tdObject.title === tdTitle);
+      console.log(tdTitle, " ", tdIndex);
       editTodoDialog.showModal();
       editConfirmBtn.addEventListener("click", (event) => {
         event.preventDefault();
         editTodoProperty(tdIndex, currentTodoList);
         currentTodoList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-        document.getElementById("editForm").reset();
+        editForm.reset();
+        console.log(editForm.elements);
         editTodoDialog.close();
         storeTdList(currentTodoList);
         clearDomDisplay();

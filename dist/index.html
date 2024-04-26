@@ -15,10 +15,13 @@
         </div>
         <div class="header-right">
           <div class="userDisplay">Username and avatar go here</div>
-          <label for="" class="toggle-box">
-            <input type="checkbox" id="toggle-checkbox" />
-            <div class="circle"></div>
-          </label>
+          <div class="display-toggle">
+            <h6>List View</h6>
+            <div class="toggle-box">
+              <div class="circle"></div>
+            </div>
+            <h6>Quad View</h6>
+          </div>
         </div>
       </div>
       <div class="navBar">
@@ -63,6 +66,28 @@
           <div class="form-buttons">
             <button id="cancelBtn" value="cancel" formmethod="dialog">Cancel</button>
             <button id="confirmBtn" value="default">Confirm</button>
+          </div>
+        </form>
+      </dialog>
+      <dialog class="modal" id="editToDoDialog">
+        <form method="dialog" id="editForm">
+          <div class="form-row">
+            <label for="">Choose a property</label>
+            <select name="td-property" id="td-property">
+              <option value="title">Title</option>
+              <option value="description">Description</option>
+              <option value="dueDate">Due Date</option>
+              <option value="priority">Priority</option>
+              <option value="projectTag">Project Tag</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="newValue"></label>
+            <input type="text" name="newValue" id="newValue">
+          </div>
+          <div class="form-buttons">
+            <button id="editCancelBtn" value="cancel" formmethod="dialog">Cancel</button>
+            <button id="editConfirmBtn" value="default">Confirm</button>
           </div>
         </form>
       </dialog>

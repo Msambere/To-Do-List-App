@@ -18,6 +18,5 @@ function initializeDisplay(currentTodoList) {
 
 export default function createSite(tdList) {
   addProjectTagOptions(tdList);
-  content.appendChild(editTodoForm());
   initializeDisplay(tdList);
 }
