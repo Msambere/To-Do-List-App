@@ -1,15 +1,13 @@
-import { createNewTodoForm } from "./newTD";
 import { editTodoForm } from "./editTD";
 import { generateTdQuadDisplay, generateTdListDisplay, generateProjectHeader } from "./sitedynamic";
 import { addOverdueClass, createQuadLists } from "./listManagment";
+import { addProjectTagOptions } from "./newTD";
 
 const content = document.getElementById("content");
 const main = document.getElementById("main");
-const allTasksBtn = document.getElementById("all");
-allTasksBtn.classList.toggle("active");
 
 function initializeDisplay(currentTodoList) {
-  main.appendChild(generateProjectHeader("All tasks"));
+  main.appendChild(generateProjectHeader("All Tasks"));
   if (main.classList.contains("quad")) {
     main.appendChild(generateTdQuadDisplay(createQuadLists(currentTodoList)));
   } else {
@@ -19,7 +17,7 @@ function initializeDisplay(currentTodoList) {
 }
 
 export default function createSite(tdList) {
-  content.appendChild(createNewTodoForm(tdList));
+  addProjectTagOptions(tdList);
   content.appendChild(editTodoForm());
   initializeDisplay(tdList);
 }

@@ -25,6 +25,8 @@ if (localStorage.getItem("tdList")) {
   localStorage.setItem("tdList", JSON.stringify(mainTodoList));
   retrieveTdList();
 }
+const allTasksBtn = document.getElementById("all");
+allTasksBtn.classList.toggle("active");
 createSite(currentTodoList);
 const main = document.getElementById("main");
 activateAllBtns();
@@ -32,8 +34,6 @@ const tdDivList = document.querySelectorAll(".todo");
 tdDivList.forEach((div) => {
   setTodoStatusImage(div, currentTodoList);
 });
-
-console.table(currentTodoList);
 
 // Set up Buttons
 const toggleBox = document.querySelector(".toggle-box");
@@ -52,7 +52,6 @@ toggleBox.addEventListener("click", () => {
 
 // DRY Button logic
 const navBtns = document.querySelectorAll(".navBtn");
-console.log(navBtns);
 navBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
     clearDomDisplay();
@@ -64,7 +63,6 @@ navBtns.forEach((btn) => {
 const projectNavBtn = document.getElementById("projects");
 const PBContainer = document.getElementById("PBContainer");
 projectNavBtn.addEventListener("click", (event) => {
-  console.log(PBContainer);
   if (!PBContainer.firstChild) {
     toggleNavBtns(event);
     generateProjectButtons(currentTodoList);
@@ -86,9 +84,9 @@ projectNavBtn.addEventListener("click", (event) => {
 });
 
 const newTDBtn = document.getElementById("new-todo-btn");
-const newTodoDialog = document.getElementById("newTodoDialog");
-const cancelBtn = newTodoDialog.querySelector("#cancelBtn");
-const confirmBtn = newTodoDialog.querySelector("#confirmBtn");
+const newTodoDialog = document.getElementById("newToDoDialog");
+const cancelBtn = document.getElementById("cancelBtn");
+const confirmBtn = document.getElementById("confirmBtn");
 
 newTDBtn.addEventListener("click", () => {
   newTDBtn.classList.toggle("clicked");
@@ -187,12 +185,10 @@ function activateEditBtns() {
 
 function toggleComplete(event) {
   const tdDiv = event.target.parentElement;
-  console.log(tdDiv);
   const tdIndex = tdDiv.getAttribute("data-index");
   changeCompleteProperty(tdIndex, currentTodoList);
   setTodoStatusImage(tdDiv, currentTodoList);
   storeTdList(currentTodoList);
-  console.table(currentTodoList);
 }
 
 function deleteTdDiv(event) {
