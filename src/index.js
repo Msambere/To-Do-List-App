@@ -35,10 +35,8 @@ tdDivList.forEach((div) => {
   setTodoStatusImage(div, currentTodoList);
 });
 
-// Set up Buttons
-const toggleBox = document.querySelector(".toggle-box");
+// Set up Display button
 const circle = document.querySelector(".circle");
-const checkbox = document.getElementById("toggle-checkbox");
 
 circle.addEventListener("click", () => {
   switchDisplayMode();
@@ -47,15 +45,6 @@ circle.addEventListener("click", () => {
   } else {
     circle.style.transform = "translateX(0px)";
   }
-});
-
-toggleBox.addEventListener("click", () => {
-  console.log(checkbox.checked);
-  /* if (checkbox.checked) {
-    circle.style.transform = "translateX(35px)";
-  } else {
-    circle.style.transform = "translateX(0px)";
-  } */
 });
 
 // DRY Button logic
@@ -78,7 +67,6 @@ projectNavBtn.addEventListener("click", (event) => {
     main.appendChild(generateProjectHeader("All Projects"));
     main.appendChild(generateProjectOverviewsDisplay(currentTodoList));
     activateAllBtns();
-    // clearing DOM and showing project details when project is selected
     const projectBtns = document.querySelectorAll(".project-btn");
     projectBtns.forEach((btn) =>
       btn.addEventListener("click", (event) => {
@@ -88,6 +76,18 @@ projectNavBtn.addEventListener("click", (event) => {
         projectBtns.forEach((btn) => btn.remove());
       }),
     );
+  } else {
+    const projectBtns = document.querySelectorAll(".project-btn");
+    projectBtns.forEach((btn) => btn.remove());
+    const projectTab = document.querySelector("#projects");
+    console.log(projectTab);
+    projectTab.classList.toggle("active");
+    const btn = document.querySelector(".default-display");
+    console.log("Before", btn);
+    btn.classList.toggle("active");
+    console.log("After", btn);
+    clearDomDisplay();
+    refreshDisplay();
   }
 });
 
