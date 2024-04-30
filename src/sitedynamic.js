@@ -179,15 +179,22 @@ function createTodoDiv(tdObject) {
   priorityDiv.textContent = tdObject.priority;
   priorityDiv.style.color = getPriorityColor(tdObject);
   // create edit button
-  const editBtn = document.createElement("img");
+  const editBtn = document.createElement("button");
   editBtn.classList.add("edit");
-  editBtn.src = "../src/Images/pencil.png";
-  editBtn.setAttribute("alt", "edit button");
+  editBtn.onclick = () => openTdEditor(tdObject);
+  const editBtnImg = document.createElement("img");
+  editBtnImg.src = "../src/Images/pencil.png";
+  editBtnImg.setAttribute("alt", "edit button");
+  editBtn.appendChild(editBtnImg);
+
   // create delete button
-  const deleteBtn = document.createElement("img");
+  const deleteBtn = document.createElement("button");
   deleteBtn.classList.add("delete");
-  deleteBtn.src = "../src/Images/delete.png";
-  deleteBtn.setAttribute("alt", "delete button");
+  deleteBtn.onclick = () => setDeleteTdIndex(tdObject);
+  const deleteBtnImg = document.createElement("img");
+  deleteBtnImg.src = "../src/Images/delete.png";
+  deleteBtnImg.setAttribute("alt", "delete button");
+  deleteBtn.appendChild(deleteBtnImg);
   // append elements to container
   todoDiv.appendChild(statusBox);
   todoDiv.appendChild(todoTitle);
@@ -225,6 +232,21 @@ function getPriorityColor(todoObject) {
   return "grey";
 }
 
+const editTodoDialog = document.getElementById("editToDoDialog");
+
+function openTdEditor(tdObject) {
+  console.table(tdObject);
+  const tdIndex = tdObject["data-index"];
+  editTodoDialog.showModal();
+  document.getElementById("editTdIndex").value = tdIndex;
+  console.log(document.getElementById("editTdIndex").value);
+  return tdObject;
+}
+
+function setDeleteTdIndex(tdObject) {
+  const tdIndex = tdObject["data-index"];
+  document.getElementById("deleteTDIndex").value = tdIndex;
+}
 // Exports
 
 export { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusImage, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay };

@@ -2,12 +2,10 @@
 import _, { format, isBefore, addDays, subDays } from "date-fns";
 import { Project } from "./constructors";
 
-function deleteTodo(tdTitle, tdList) {
-  // Remove from main list
-  const tdIndex = tdList.findIndex((tdObject) => tdObject.title === tdTitle);
+function deleteTodo(tdIndex, tdList) {
   tdList.splice(tdIndex, 1);
   tdList.sort((a, b) => a.dueDate - b.dueDate);
-  // Remove from main display
+  indexList(tdList);
 }
 
 function checkIfOverdue(tdObject) {

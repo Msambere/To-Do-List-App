@@ -29,11 +29,13 @@ const allTasksBtn = document.getElementById("all");
 allTasksBtn.classList.toggle("active");
 createSite(currentTodoList);
 const main = document.getElementById("main");
+activateEditFormBtns();
 activateAllBtns();
 const tdDivList = document.querySelectorAll(".todo");
 tdDivList.forEach((div) => {
   setTodoStatusImage(div, currentTodoList);
 });
+console.table(currentTodoList);
 
 // Set up Display button
 const circle = document.querySelector(".circle");
@@ -51,7 +53,6 @@ circle.addEventListener("click", () => {
 const navBtns = document.querySelectorAll(".navBtn");
 navBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
-    clearDomDisplay();
     toggleNavBtns(event);
     refreshDisplay();
   });
@@ -70,7 +71,6 @@ projectNavBtn.addEventListener("click", (event) => {
     const projectBtns = document.querySelectorAll(".project-btn");
     projectBtns.forEach((btn) =>
       btn.addEventListener("click", (event) => {
-        clearDomDisplay();
         toggleNavBtns(event);
         refreshDisplay();
         projectBtns.forEach((btn) => btn.remove());
@@ -80,13 +80,9 @@ projectNavBtn.addEventListener("click", (event) => {
     const projectBtns = document.querySelectorAll(".project-btn");
     projectBtns.forEach((btn) => btn.remove());
     const projectTab = document.querySelector("#projects");
-    console.log(projectTab);
     projectTab.classList.toggle("active");
     const btn = document.querySelector(".default-display");
-    console.log("Before", btn);
     btn.classList.toggle("active");
-    console.log("After", btn);
-    clearDomDisplay();
     refreshDisplay();
   }
 });
@@ -122,7 +118,6 @@ cancelBtn.addEventListener("click", () => {
 
 function switchDisplayMode() {
   main.classList.toggle("quad");
-  clearDomDisplay();
   refreshDisplay();
 }
 
@@ -150,7 +145,6 @@ function displayNewTdDiv(tdObject) {
 function activateAllBtns() {
   activateCheckBoxes();
   activateDeleteBtns();
-  activateEditBtns();
 }
 
 function activateDeleteBtns() {
@@ -163,36 +157,25 @@ function activateCheckBoxes() {
   checkBoxes.forEach((box) => box.addEventListener("click", (event) => toggleComplete(event)));
 }
 
-function activateEditBtns() {
-  const editTdBtns = document.querySelectorAll(".edit");
+function activateEditFormBtns() {
   const editTodoDialog = document.getElementById("editToDoDialog");
   const editForm = document.getElementById("editForm");
   const editCancelBtn = document.querySelector("#editCancelBtn");
   const editConfirmBtn = document.querySelector("#editConfirmBtn");
-
-  editTdBtns.forEach((Btn) =>
-    Btn.addEventListener("click", (event) => {
-      const tdTitle = event.target.parentElement.firstChild.nextSibling.textContent;
-      const tdIndex = currentTodoList.findIndex((tdObject) => tdObject.title === tdTitle);
-      console.log(tdTitle, " ", tdIndex);
-      editTodoDialog.showModal();
-      editConfirmBtn.addEventListener("click", (event) => {
-        event.preventDefault();
-        editTodoProperty(tdIndex, currentTodoList);
-        currentTodoList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-        editForm.reset();
-        console.log(editForm.elements);
-        editTodoDialog.close();
-        storeTdList(currentTodoList);
-        clearDomDisplay();
-        refreshDisplay();
-      });
-      editCancelBtn.addEventListener("click", () => {
-        document.getElementById("editForm").reset();
-        editTodoDialog.close();
-      });
-    }),
-  );
+  editConfirmBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const editTdIndex = document.getElementById("editTdIndex").value;
+    currentTodoList[editTdIndex] = editTodoProperty(currentTodoList);
+    currentTodoList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+    editForm.reset();
+    editTodoDialog.close();
+    storeTdList(currentTodoList);
+    refreshDisplay();
+  });
+  editCancelBtn.addEventListener("click", () => {
+    document.getElementById("editForm").reset();
+    editTodoDialog.close();
+  });
 }
 
 function toggleComplete(event) {
@@ -203,12 +186,15 @@ function toggleComplete(event) {
   storeTdList(currentTodoList);
 }
 
-function deleteTdDiv(event) {
-  const tdTitle = event.target.parentElement.firstChild.nextSibling.textContent;
-  deleteTodo(tdTitle, currentTodoList);
-  const tdDiv = event.target.parentElement;
-  tdDiv.remove();
+function deleteTdDiv() {
+  const tdIndex = document.getElementById("deleteTDIndex").value;
+  deleteTodo(tdIndex, currentTodoList);
+  // const tdDiv = event.target.parentElement.parentElement;
+  // console.log(tdDiv);
+  // tdDiv.remove();
   storeTdList(currentTodoList);
+  console.table(currentTodoList);
+  refreshDisplay();
 }
 
 function toggleNavBtns(event) {
@@ -228,6 +214,7 @@ function clearDomDisplay() {
 }
 
 function refreshDisplay() {
+  clearDomDisplay();
   const currentTab = document.querySelector(".active");
   const header = currentTab.textContent;
   let content = "";
