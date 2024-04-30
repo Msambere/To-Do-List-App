@@ -71,6 +71,7 @@
       </dialog>
       <dialog class="modal" id="editToDoDialog">
         <form method="dialog" id="editForm">
+          <input type="hidden" name="editTdIndex" id="editTdIndex" value="">
           <div class="form-row">
             <label for="">Choose a property</label>
             <select name="td-property" id="td-property">
@@ -92,7 +93,7 @@
         </form>
       </dialog>
     </div>
-
+    <input type="hidden" name="deleteTDIndex" id="deleteTDIndex" value="">
     <script src="main.js"></script>
   </body>
 </html>
