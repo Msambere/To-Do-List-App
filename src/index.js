@@ -2,18 +2,10 @@
 import { mainTodoList } from "./testTDList";
 import createSite from "./siteConstants";
 import { createDailyList, createThisWeekList, createTodayList, deleteTodo, addOverdueClass, createQuadLists, createProjectList } from "./listManagment";
-import {
-  generateTdListDisplay,
-  generateProjectHeader,
-  createTodoDiv,
-  setTodoStatusImage,
-  generateTdQuadDisplay,
-  generateProjectButtons,
-  generateProjectOverviewsDisplay,
-  generateQuadDateSelector,
-} from "./sitedynamic";
+import { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusImage, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay } from "./sitedynamic";
 import { addNewTodo } from "./newTD";
 import { editTodoProperty, changeCompleteProperty } from "./editTD";
+
 // Setting Local Storage
 let currentTodoList = [];
 function retrieveTdList() {
@@ -33,17 +25,19 @@ if (localStorage.getItem("tdList")) {
   localStorage.setItem("tdList", JSON.stringify(mainTodoList));
   retrieveTdList();
 }
-
+const allTasksBtn = document.getElementById("all");
+allTasksBtn.classList.toggle("active");
 createSite(currentTodoList);
 const main = document.getElementById("main");
 activateEditFormBtns();
 activateAllBtns();
-let tdDivList = document.querySelectorAll(".todo");
+const tdDivList = document.querySelectorAll(".todo");
 tdDivList.forEach((div) => {
   setTodoStatusImage(div, currentTodoList);
 });
+console.table(currentTodoList);
 
-// Set up SwitchDisplay button
+// Set up Display button
 const circle = document.querySelector(".circle");
 
 circle.addEventListener("click", () => {
@@ -55,7 +49,7 @@ circle.addEventListener("click", () => {
   }
 });
 
-// Nav Button logic
+// DRY Button logic
 const navBtns = document.querySelectorAll(".navBtn");
 navBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
@@ -93,7 +87,6 @@ projectNavBtn.addEventListener("click", (event) => {
   }
 });
 
-// New TD buttons
 const newTDBtn = document.getElementById("new-todo-btn");
 const newTodoDialog = document.getElementById("newToDoDialog");
 const myForm = document.getElementById("myForm");
@@ -120,8 +113,6 @@ cancelBtn.addEventListener("click", () => {
   document.getElementById("myForm").reset();
   newTodoDialog.close();
 });
-
-// Change Urgency Date logic
 
 // Helper functions
 
@@ -187,11 +178,6 @@ function activateEditFormBtns() {
   });
 }
 
-const infoCloseBtn = document.getElementById("infoCloseBtn");
-const infoDialog = document.getElementById("tdInfoDialog");
-
-infoCloseBtn.addEventListener("click", () => infoDialog.close());
-
 function toggleComplete(event) {
   const tdDiv = event.target.parentElement;
   const tdIndex = tdDiv.getAttribute("data-index");
@@ -203,7 +189,11 @@ function toggleComplete(event) {
 function deleteTdDiv() {
   const tdIndex = document.getElementById("deleteTDIndex").value;
   deleteTodo(tdIndex, currentTodoList);
+  // const tdDiv = event.target.parentElement.parentElement;
+  // console.log(tdDiv);
+  // tdDiv.remove();
   storeTdList(currentTodoList);
+  console.table(currentTodoList);
   refreshDisplay();
 }
 
@@ -249,26 +239,15 @@ function refreshDisplay() {
   }
   main.appendChild(generateProjectHeader(header));
   if (main.classList.contains("quad")) {
-    main.appendChild(generateQuadDateSelector());
     main.appendChild(generateTdQuadDisplay(createQuadLists(content)));
     addOverdueClass(currentTodoList);
-    // const newDateSelector = document.getElementById("date-selector");
-    // newDateSelector.addEventListener("change", () => {
-    // refreshDisplay();
-    // });
   } else {
     main.appendChild(generateTdListDisplay(content));
     addOverdueClass(currentTodoList);
   }
   activateAllBtns();
-  tdDivList = document.querySelectorAll(".todo");
+  const tdDivList = document.querySelectorAll(".todo");
   tdDivList.forEach((div) => {
     setTodoStatusImage(div, currentTodoList);
   });
 }
-
-const logoBtn = document.querySelector(".logo");
-
-logoBtn.addEventListener("click", () => {
-  console.table(currentTodoList);
-});

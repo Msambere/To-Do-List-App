@@ -9,7 +9,7 @@ function Todo(title, description, dueDate, priority, projectTag) {
   this.dueDate = dueDateFormat(dueDate);
   this.priority = priority;
   this.projectTag = projectTag;
-  this.status = "incomplete";
+  this.status = "";
 }
 
 function Project(projectTag, tdList) {
@@ -31,4 +31,4 @@ function dueDateFormat(dueDate) {
   return format(new Date(dueDate).toLocaleString(), "M-dd-y");
 }
 
-export { Todo, User, Project, dueDateFormat };
+export { Todo, User, Project };

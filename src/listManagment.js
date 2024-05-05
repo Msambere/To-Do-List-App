@@ -76,9 +76,7 @@ function createProjectTDLists(tdList) {
 }
 
 function createQuadLists(tdList) {
-  const urgencyDate = document.getElementById("date-selector").value || addDays(new Date(), 10);
-  console.log("selected date", document.getElementById("date-selector").value);
-  console.log("set date", urgencyDate);
+  const urgencyDate = addDays(new Date(), 10);
   const quad1 = tdList.filter((td) => td.priority === "High" && td.dueDate <= format(urgencyDate, "M-dd-y"));
   const quad2 = tdList.filter((td) => (td.priority === "High" && td.dueDate > format(urgencyDate, "M-dd-y")) || (td.priority === "Medium" && td.dueDate <= format(urgencyDate, "M-dd-y")));
   const quad3 = tdList.filter((td) => (td.priority === "Low" && td.dueDate <= format(urgencyDate, "M-dd-y")) || (td.priority === "Medium" && td.dueDate > format(urgencyDate, "M-dd-y")));

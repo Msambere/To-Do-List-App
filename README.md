@@ -9,12 +9,10 @@ Finished tasks:
 -2nd click: remove project buttons and return to default display
 -fix edit button function
 -fix delete button
--create method for seeing td description (hover or magnifying image/click for dialog box like in digital library)
 
 Next tasks:
--Responsive design
--style modals
--have user set urgency date
--store and retrieve date input
--have user select a default display
--Make code more DRY and organize it
+
+- Responsiv design
+- have user set urgency date
+- have user select a default display
+- create method for seeing td description (hover or magnifying image/click for dialog box like in digital library)
