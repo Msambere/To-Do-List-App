@@ -1,18 +1,26 @@
+import { addDays } from "date-fns";
 import { createProjectTagList, createProjectTDLists, getProjectStats } from "./listManagment";
+import { dueDateFormat } from "./constructors";
 
 function generateQuadDateSelector() {
   const container = document.createElement("div");
   container.classList.add("date-selector-div");
-
+  const dateSelectorForm = document.createElement("form");
+  dateSelectorForm.setAttribute("id", "dateForm");
   const dateSelectorLabel = document.createElement("label");
-  dateSelectorLabel.classList.add("date-selector");
+  dateSelectorLabel.setAttribute("for", "date-selector");
   dateSelectorLabel.textContent = "Choose the date cut off for urgency:   ";
   const dateSelector = document.createElement("input");
   dateSelector.setAttribute("type", "date");
   dateSelector.setAttribute("id", "date-selector");
-
-  dateSelectorLabel.appendChild(dateSelector);
-  container.appendChild(dateSelectorLabel);
+  dateSelector.setAttribute("name", "date-selector");
+  dateSelector.setAttribute("value", dueDateFormat(addDays(new Date(), 10)));
+  const submitBtn = document.createElement("button");
+  submitBtn.textContent = "Change";
+  dateSelectorForm.appendChild(dateSelectorLabel);
+  dateSelectorForm.appendChild(dateSelector);
+  dateSelectorForm.appendChild(submitBtn);
+  container.appendChild(dateSelectorForm);
   return container;
 }
 
@@ -178,13 +186,19 @@ function createTodoDiv(tdObject) {
   priorityDiv.classList.add("priority-div");
   priorityDiv.textContent = tdObject.priority;
   priorityDiv.style.color = getPriorityColor(tdObject);
+  // create info button
+  const infoBtn = document.createElement("button");
+  infoBtn.classList.add("info");
+  infoBtn.onclick = () => showInfo(tdObject);
+  infoBtn.textContent = "Info";
   // create edit button
   const editBtn = document.createElement("button");
   editBtn.classList.add("edit");
   editBtn.onclick = () => openTdEditor(tdObject);
   const editBtnImg = document.createElement("img");
   editBtnImg.src = "../src/Images/pencil.png";
-  editBtnImg.setAttribute("alt", "edit button");
+  editBtnImg.setAttribute("onerror", "this.onerror=null;this.src = ./Images/pencil.png");
+  editBtnImg.setAttribute("alt", "edit");
   editBtn.appendChild(editBtnImg);
 
   // create delete button
@@ -193,13 +207,14 @@ function createTodoDiv(tdObject) {
   deleteBtn.onclick = () => setDeleteTdIndex(tdObject);
   const deleteBtnImg = document.createElement("img");
   deleteBtnImg.src = "../src/Images/delete.png";
-  deleteBtnImg.setAttribute("alt", "delete button");
+  deleteBtnImg.setAttribute("alt", "delete");
   deleteBtn.appendChild(deleteBtnImg);
   // append elements to container
   todoDiv.appendChild(statusBox);
   todoDiv.appendChild(todoTitle);
   todoDiv.appendChild(dueDateDiv);
   todoDiv.appendChild(priorityDiv);
+  todoDiv.appendChild(infoBtn);
   todoDiv.appendChild(editBtn);
   todoDiv.appendChild(deleteBtn);
 
@@ -209,7 +224,7 @@ function createTodoDiv(tdObject) {
 function setTodoStatusImage(tdDiv, tdList) {
   const tdIndex = tdDiv.getAttribute("data-index");
   const currentStatus = tdList[tdIndex].status;
-  if (currentStatus !== "complete") {
+  if (currentStatus === "incomplete") {
     tdDiv.classList.remove("complete");
     tdDiv.firstChild.src = "../src/Images/unchecked-box.png";
   } else if (currentStatus === "complete") {
@@ -235,11 +250,9 @@ function getPriorityColor(todoObject) {
 const editTodoDialog = document.getElementById("editToDoDialog");
 
 function openTdEditor(tdObject) {
-  console.table(tdObject);
   const tdIndex = tdObject["data-index"];
   editTodoDialog.showModal();
   document.getElementById("editTdIndex").value = tdIndex;
-  console.log(document.getElementById("editTdIndex").value);
   return tdObject;
 }
 
@@ -247,6 +260,14 @@ function setDeleteTdIndex(tdObject) {
   const tdIndex = tdObject["data-index"];
   document.getElementById("deleteTDIndex").value = tdIndex;
 }
+
+const infoDialog = document.getElementById("tdInfoDialog");
+const infoContent = document.getElementById("expandedInfo");
+function showInfo(tdObject) {
+  infoContent.textContent = tdObject.description;
+  infoDialog.showModal();
+}
+
 // Exports
 
-export { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusImage, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay };
+export { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusImage, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay, generateQuadDateSelector };

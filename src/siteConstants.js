@@ -2,11 +2,11 @@ import { generateTdQuadDisplay, generateTdListDisplay, generateProjectHeader } f
 import { addOverdueClass, createQuadLists } from "./listManagment";
 import { addProjectTagOptions } from "./newTD";
 
-const content = document.getElementById("content");
 const main = document.getElementById("main");
-const circle = document.querySelector(".circle");
 
 function initializeDisplay(currentTodoList) {
+  const allTasksBtn = document.getElementById("all");
+  allTasksBtn.classList.toggle("active");
   main.appendChild(generateProjectHeader("All Tasks"));
   if (main.classList.contains("quad")) {
     main.appendChild(generateTdQuadDisplay(createQuadLists(currentTodoList)));
