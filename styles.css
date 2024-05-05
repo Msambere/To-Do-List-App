@@ -149,7 +149,7 @@
   padding: 5px;
   background-color: white;
   display: grid;
-  grid-template-columns: 30px 1fr 125px 100px 25px 25px;
+  grid-template-columns: 30px 1fr 125px 100px 25px 25px 25px;
   gap: 8px;
 }
 
