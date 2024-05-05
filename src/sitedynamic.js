@@ -168,11 +168,12 @@ function createTodoDiv(tdObject) {
   const todoDiv = document.createElement("div");
   todoDiv.classList.add("todo");
   todoDiv.setAttribute("data-index", tdObject["data-index"]);
-  // create checkbox img/div with src controlled by css
+  // Create Status checkbox
   const statusBox = document.createElement("input");
   statusBox.setAttribute("type", "checkbox");
   statusBox.classList.add("td-status-check");
-  /* const statusBox = document.createElement("img");
+  /* create checkbox img/div with src controlled by css 
+  const statusBox = document.createElement("img");
         statusBox.classList.add("checkbox");
         statusBox.src = "../src/Images/unchecked-box.png";
         statusBox.setAttribute("alt", "checkbox"); */
@@ -200,7 +201,7 @@ function createTodoDiv(tdObject) {
   editBtn.classList.add("td-btn");
   editBtn.onclick = () => openTdEditor(tdObject);
   const editBtnImg = document.createElement("img");
-  editBtnImg.src = "../dist/Images/pencil.png";
+  editBtnImg.src = "./Images/pencil.png";
   editBtnImg.setAttribute("onerror", "this.onerror=null;this.src = ./Images/pencil.png");
   editBtnImg.setAttribute("alt", "edit");
   editBtnImg.classList.add("button-icon");
@@ -212,7 +213,7 @@ function createTodoDiv(tdObject) {
   deleteBtn.classList.add("delete");
   deleteBtn.onclick = () => setDeleteTdIndex(tdObject);
   const deleteBtnImg = document.createElement("img");
-  deleteBtnImg.src = "../dist/Images/delete.png";
+  deleteBtnImg.src = "./Images/delete.png";
   deleteBtnImg.setAttribute("alt", "delete");
   deleteBtnImg.classList.add("button-icon");
   deleteBtn.appendChild(deleteBtnImg);

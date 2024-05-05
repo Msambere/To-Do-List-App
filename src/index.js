@@ -116,7 +116,10 @@ cancelBtn.addEventListener("click", () => {
 
 const infoCloseBtn = document.getElementById("infoCloseBtn");
 const infoDialog = document.getElementById("tdInfoDialog");
+infoDialog.close();
 infoCloseBtn.addEventListener("click", () => {
+  console.log("close button clicked");
+  console.log(infoDialog);
   infoDialog.close();
 });
 
