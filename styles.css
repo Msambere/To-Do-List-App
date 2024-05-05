@@ -270,6 +270,95 @@ img.checkbox {
   border: 20px solid rgba(129, 218, 203, 0.8);
 }
 
+.modal {
+  width: 33vw;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  border: 1px solid #d6d9dc;
+  border-radius: 8px;
+}
+
+::backdrop {
+  background-image: radial-gradient(rgb(192, 194, 192), rgb(56, 55, 56));
+  opacity: 0.75;
+}
+
+form {
+  margin: 20px;
+}
+
+.form-row {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.form-row input[type="text"] {
+  background-color: #ffffff;
+  border: 1px solid #d6d9dc;
+  border-radius: 3px;
+  width: 100%;
+  padding: 7px;
+  font-size: 0.7rem;
+}
+
+.form-row label {
+  margin-bottom: 10px;
+}
+
+.form-row select {
+  width: 100%;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  -webkit-appearance: none;
+}
+.form-buttons {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.form-buttons button,
+#infoCloseBtn {
+  font-size: 16px;
+  font-weight: bold;
+
+  color: #ffffff;
+  background-color: #5e5f61;
+
+  border: none;
+  border-radius: 8px;
+
+  padding: 10px 40px;
+  cursor: pointer;
+}
+
+.form-buttons button:hover,
+#infoCloseBtn:hover {
+  background-color: #d7dbdf;
+}
+
+.form-buttons button:active,
+#infoCloseBtn:active {
+  background-color: #b6babe;
+}
+
+#tdInfoDialog {
+  padding: 20px;
+}
+
+#expandedInfo {
+  margin: 20px;
+}
+
 /* Sources
 color palette: https://coolors.co/palette/50514f-f25f5c-ffe066-247ba0-70c1b3
 
