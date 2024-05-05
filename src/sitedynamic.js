@@ -169,10 +169,14 @@ function createTodoDiv(tdObject) {
   todoDiv.classList.add("todo");
   todoDiv.setAttribute("data-index", tdObject["data-index"]);
   // create checkbox img/div with src controlled by css
-  const statusBox = document.createElement("img");
-  statusBox.classList.add("checkbox");
-  statusBox.src = "../src/Images/unchecked-box.png";
-  statusBox.setAttribute("alt", "checkbox");
+  const statusBox = document.createElement("input");
+  statusBox.setAttribute("type", "checkbox");
+  statusBox.classList.add("td-status-check");
+  /* const statusBox = document.createElement("img");
+        statusBox.classList.add("checkbox");
+        statusBox.src = "../src/Images/unchecked-box.png";
+        statusBox.setAttribute("alt", "checkbox"); */
+
   // create title div/button to expand
   const todoTitle = document.createElement("div");
   todoTitle.classList.add("todo-title");
@@ -205,6 +209,7 @@ function createTodoDiv(tdObject) {
   // create delete button
   const deleteBtn = document.createElement("button");
   deleteBtn.classList.add("td-btn");
+  deleteBtn.classList.add("delete");
   deleteBtn.onclick = () => setDeleteTdIndex(tdObject);
   const deleteBtnImg = document.createElement("img");
   deleteBtnImg.src = "../src/Images/delete.png";
@@ -223,15 +228,13 @@ function createTodoDiv(tdObject) {
   return todoDiv;
 }
 
-function setTodoStatusImage(tdDiv, tdList) {
+function setTodoStatusClass(tdDiv, tdList) {
   const tdIndex = tdDiv.getAttribute("data-index");
   const currentStatus = tdList[tdIndex].status;
   if (currentStatus === "incomplete") {
     tdDiv.classList.remove("complete");
-    tdDiv.firstChild.src = "../src/Images/unchecked-box.png";
   } else if (currentStatus === "complete") {
     tdDiv.classList.add("complete");
-    tdDiv.firstChild.src = "../src/Images/checked-checkbox.png";
   }
 }
 
@@ -272,4 +275,4 @@ function showInfo(tdObject) {
 
 // Exports
 
-export { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusImage, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay, generateQuadDateSelector };
+export { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusClass, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay, generateQuadDateSelector };

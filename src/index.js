@@ -2,7 +2,7 @@
 import { mainTodoList } from "./testTDList";
 import createSite from "./siteConstants";
 import { createDailyList, createThisWeekList, createTodayList, deleteTodo, addOverdueClass, createQuadLists, createProjectList } from "./listManagment";
-import { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusImage, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay } from "./sitedynamic";
+import { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusClass, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay } from "./sitedynamic";
 import { addNewTodo } from "./newTD";
 import { editTodoProperty, changeCompleteProperty } from "./editTD";
 
@@ -29,13 +29,11 @@ const allTasksBtn = document.getElementById("all");
 allTasksBtn.classList.toggle("active");
 createSite(currentTodoList);
 const main = document.getElementById("main");
+const checkBoxes = document.querySelectorAll(".td-status-check");
+const divList = document.querySelectorAll(".todo");
 activateEditFormBtns();
 activateAllBtns();
-const tdDivList = document.querySelectorAll(".todo");
-tdDivList.forEach((div) => {
-  setTodoStatusImage(div, currentTodoList);
-});
-
+divList.forEach((div) => setTodoStatusClass(div, currentTodoList));
 const logoBtn = document.querySelector(".logo");
 logoBtn.addEventListener("click", () => console.table(currentTodoList));
 
@@ -132,7 +130,7 @@ function switchDisplayMode() {
 function displayNewTdDiv(tdObject) {
   const newDiv = createTodoDiv(tdObject);
   const tdIndex = currentTodoList.findIndex((element) => element.title === tdObject.title);
-  const divList = document.querySelectorAll(".todo");
+  // const divList = document.querySelectorAll(".todo");
   if (tdIndex !== 0) {
     const siblingTitle = currentTodoList[tdIndex - 1].title;
     divList.forEach((div) => {
@@ -161,7 +159,6 @@ function activateDeleteBtns() {
 }
 
 function activateCheckBoxes() {
-  const checkBoxes = document.querySelectorAll(".checkbox");
   checkBoxes.forEach((box) => box.addEventListener("click", (event) => toggleComplete(event)));
 }
 
@@ -187,10 +184,11 @@ function activateEditFormBtns() {
 }
 
 function toggleComplete(event) {
+  console.log("toggleComplete() triggered");
   const tdDiv = event.target.parentElement;
   const tdIndex = tdDiv.getAttribute("data-index");
   currentTodoList[tdIndex] = changeCompleteProperty(tdIndex, currentTodoList);
-  setTodoStatusImage(tdDiv, currentTodoList);
+  setTodoStatusClass(tdDiv, currentTodoList);
   storeTdList(currentTodoList);
 }
 
@@ -250,8 +248,4 @@ function refreshDisplay() {
     addOverdueClass(currentTodoList);
   }
   activateAllBtns();
-  const tdDivList = document.querySelectorAll(".todo");
-  tdDivList.forEach((div) => {
-    setTodoStatusImage(div, currentTodoList);
-  });
 }
