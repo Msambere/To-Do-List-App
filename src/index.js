@@ -33,7 +33,12 @@ const checkBoxes = document.querySelectorAll(".td-status-check");
 const divList = document.querySelectorAll(".todo");
 activateEditFormBtns();
 activateAllBtns();
-divList.forEach((div) => setTodoStatusClass(div, currentTodoList));
+divList.forEach((div) => {
+  setTodoStatusClass(div, currentTodoList);
+  if (div.classList.contains("complete")) {
+    div.firstChild.setAttribute("checked", true);
+  }
+});
 const logoBtn = document.querySelector(".logo");
 logoBtn.addEventListener("click", () => console.table(currentTodoList));
 
@@ -116,7 +121,6 @@ cancelBtn.addEventListener("click", () => {
 
 const infoCloseBtn = document.getElementById("infoCloseBtn");
 const infoDialog = document.getElementById("tdInfoDialog");
-infoDialog.close();
 infoCloseBtn.addEventListener("click", () => {
   console.log("close button clicked");
   console.log(infoDialog);
