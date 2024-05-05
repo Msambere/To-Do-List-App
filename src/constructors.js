@@ -9,7 +9,7 @@ function Todo(title, description, dueDate, priority, projectTag) {
   this.dueDate = dueDateFormat(dueDate);
   this.priority = priority;
   this.projectTag = projectTag;
-  this.status = "";
+  this.status = "incomplete";
 }
 
 function Project(projectTag, tdList) {

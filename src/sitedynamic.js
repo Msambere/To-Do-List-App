@@ -188,26 +188,28 @@ function createTodoDiv(tdObject) {
   priorityDiv.style.color = getPriorityColor(tdObject);
   // create info button
   const infoBtn = document.createElement("button");
-  infoBtn.classList.add("info");
+  infoBtn.classList.add("td-btn");
   infoBtn.onclick = () => showInfo(tdObject);
   infoBtn.textContent = "Info";
   // create edit button
   const editBtn = document.createElement("button");
-  editBtn.classList.add("edit");
+  editBtn.classList.add("td-btn");
   editBtn.onclick = () => openTdEditor(tdObject);
   const editBtnImg = document.createElement("img");
   editBtnImg.src = "../src/Images/pencil.png";
   editBtnImg.setAttribute("onerror", "this.onerror=null;this.src = ./Images/pencil.png");
   editBtnImg.setAttribute("alt", "edit");
+  editBtnImg.classList.add("button-icon");
   editBtn.appendChild(editBtnImg);
 
   // create delete button
   const deleteBtn = document.createElement("button");
-  deleteBtn.classList.add("delete");
+  deleteBtn.classList.add("td-btn");
   deleteBtn.onclick = () => setDeleteTdIndex(tdObject);
   const deleteBtnImg = document.createElement("img");
   deleteBtnImg.src = "../src/Images/delete.png";
   deleteBtnImg.setAttribute("alt", "delete");
+  deleteBtnImg.classList.add("button-icon");
   deleteBtn.appendChild(deleteBtnImg);
   // append elements to container
   todoDiv.appendChild(statusBox);

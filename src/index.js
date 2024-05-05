@@ -35,7 +35,9 @@ const tdDivList = document.querySelectorAll(".todo");
 tdDivList.forEach((div) => {
   setTodoStatusImage(div, currentTodoList);
 });
-console.table(currentTodoList);
+
+const logoBtn = document.querySelector(".logo");
+logoBtn.addEventListener("click", () => console.table(currentTodoList));
 
 // Set up Display button
 const circle = document.querySelector(".circle");
@@ -117,7 +119,6 @@ cancelBtn.addEventListener("click", () => {
 const infoCloseBtn = document.getElementById("infoCloseBtn");
 const infoDialog = document.getElementById("tdInfoDialog");
 infoCloseBtn.addEventListener("click", () => {
-  console.log("close btn clicked");
   infoDialog.close();
 });
 
@@ -188,7 +189,7 @@ function activateEditFormBtns() {
 function toggleComplete(event) {
   const tdDiv = event.target.parentElement;
   const tdIndex = tdDiv.getAttribute("data-index");
-  changeCompleteProperty(tdIndex, currentTodoList);
+  currentTodoList[tdIndex] = changeCompleteProperty(tdIndex, currentTodoList);
   setTodoStatusImage(tdDiv, currentTodoList);
   storeTdList(currentTodoList);
 }
@@ -196,11 +197,7 @@ function toggleComplete(event) {
 function deleteTdDiv() {
   const tdIndex = document.getElementById("deleteTDIndex").value;
   deleteTodo(tdIndex, currentTodoList);
-  // const tdDiv = event.target.parentElement.parentElement;
-  // console.log(tdDiv);
-  // tdDiv.remove();
   storeTdList(currentTodoList);
-  console.table(currentTodoList);
   refreshDisplay();
 }
 

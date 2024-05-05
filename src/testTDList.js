@@ -19,14 +19,6 @@ hardCodeTDs("Today plus 5","checking fn", addDays(new Date(), 5),"Medium","Test 
 hardCodeTDs("read the newspaper","populate daily list","","Medium","Daily",);
 hardCodeTDs("Always Quad 4","should be there",addDays(new Date(), 20),"Low","Test 1",);
 // Functions
-function hardCodeTDs(title, descript, dueDate, priority, projectTag,) {
-  const newTodo = new Todo(title, descript, dueDate, priority, projectTag,);
-  mainTodoList.push(newTodo);
-  mainTodoList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-  indexList(mainTodoList);
-  return mainTodoList;
-}
-
 function indexList(tdList) {
   tdList.forEach((tdObject) => {
     tdObject["data-index"] = tdList.findIndex(
@@ -34,5 +26,15 @@ function indexList(tdList) {
     );
   });
 }
+
+function hardCodeTDs(title, descript, dueDate, priority, projectTag,) {
+  const newTodo = new Todo(title, descript, dueDate, priority, projectTag);
+  mainTodoList.push(newTodo);
+  mainTodoList.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  indexList(mainTodoList);
+  return mainTodoList;
+}
+
+
 
 export {mainTodoList}
