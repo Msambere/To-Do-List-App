@@ -114,6 +114,13 @@ cancelBtn.addEventListener("click", () => {
   newTodoDialog.close();
 });
 
+const infoCloseBtn = document.getElementById("infoCloseBtn");
+const infoDialog = document.getElementById("tdInfoDialog");
+infoCloseBtn.addEventListener("click", () => {
+  console.log("close btn clicked");
+  infoDialog.close();
+});
+
 // Helper functions
 
 function switchDisplayMode() {
