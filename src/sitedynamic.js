@@ -195,7 +195,11 @@ function createTodoDiv(tdObject) {
   const infoBtn = document.createElement("button");
   infoBtn.classList.add("td-btn");
   infoBtn.onclick = () => showInfo(tdObject);
-  infoBtn.textContent = "Info";
+  const infoBtnImg = document.createElement("img");
+  infoBtnImg.src = "./Images/icons8-magnifying-glass-64.png";
+  infoBtnImg.setAttribute("alt", "info");
+  infoBtnImg.classList.add("button-icon");
+  infoBtn.appendChild(infoBtnImg);
   // create edit button
   const editBtn = document.createElement("button");
   editBtn.classList.add("td-btn");
