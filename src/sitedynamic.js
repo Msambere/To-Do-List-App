@@ -200,7 +200,7 @@ function createTodoDiv(tdObject) {
   editBtn.classList.add("td-btn");
   editBtn.onclick = () => openTdEditor(tdObject);
   const editBtnImg = document.createElement("img");
-  editBtnImg.src = "../src/Images/pencil.png";
+  editBtnImg.src = "../dist/Images/pencil.png";
   editBtnImg.setAttribute("onerror", "this.onerror=null;this.src = ./Images/pencil.png");
   editBtnImg.setAttribute("alt", "edit");
   editBtnImg.classList.add("button-icon");
@@ -212,7 +212,7 @@ function createTodoDiv(tdObject) {
   deleteBtn.classList.add("delete");
   deleteBtn.onclick = () => setDeleteTdIndex(tdObject);
   const deleteBtnImg = document.createElement("img");
-  deleteBtnImg.src = "../src/Images/delete.png";
+  deleteBtnImg.src = "../dist/Images/delete.png";
   deleteBtnImg.setAttribute("alt", "delete");
   deleteBtnImg.classList.add("button-icon");
   deleteBtn.appendChild(deleteBtnImg);
