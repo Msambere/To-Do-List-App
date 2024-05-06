@@ -25,24 +25,27 @@ if (localStorage.getItem("tdList")) {
   localStorage.setItem("tdList", JSON.stringify(mainTodoList));
   retrieveTdList();
 }
+
 const allTasksBtn = document.getElementById("all");
 allTasksBtn.classList.toggle("active");
+
 createSite(currentTodoList);
+
 const main = document.getElementById("main");
-const checkBoxes = document.querySelectorAll(".td-status-check");
-const divList = document.querySelectorAll(".todo");
+let checkBoxes = document.querySelectorAll(".td-status-check");
+let divList = document.querySelectorAll(".todo");
+
 activateEditFormBtns();
 activateAllBtns();
 divList.forEach((div) => {
   setTodoStatusClass(div, currentTodoList);
-  if (div.classList.contains("complete")) {
-    div.firstChild.setAttribute("checked", true);
-  }
 });
+resetCheckboxes();
+
 const logoBtn = document.querySelector(".logo");
 logoBtn.addEventListener("click", () => console.table(currentTodoList));
 
-// Set up Display button
+// Set up Switch display button
 const circle = document.querySelector(".circle");
 
 circle.addEventListener("click", () => {
@@ -92,6 +95,7 @@ projectNavBtn.addEventListener("click", (event) => {
   }
 });
 
+// Set up New TD Btns
 const newTDBtn = document.getElementById("new-todo-btn");
 const newTodoDialog = document.getElementById("newToDoDialog");
 const myForm = document.getElementById("myForm");
@@ -119,15 +123,23 @@ cancelBtn.addEventListener("click", () => {
   newTodoDialog.close();
 });
 
+// Set up TD Info close btn
 const infoCloseBtn = document.getElementById("infoCloseBtn");
 const infoDialog = document.getElementById("tdInfoDialog");
 infoCloseBtn.addEventListener("click", () => {
-  console.log("close button clicked");
-  console.log(infoDialog);
   infoDialog.close();
 });
 
 // Helper functions
+
+function resetCheckboxes() {
+  divList = document.querySelectorAll(".todo");
+  divList.forEach((div) => {
+    if (div.classList.contains("complete")) {
+      div.firstChild.setAttribute("checked", true);
+    }
+  });
+}
 
 function switchDisplayMode() {
   main.classList.toggle("quad");
@@ -137,7 +149,7 @@ function switchDisplayMode() {
 function displayNewTdDiv(tdObject) {
   const newDiv = createTodoDiv(tdObject);
   const tdIndex = currentTodoList.findIndex((element) => element.title === tdObject.title);
-  // const divList = document.querySelectorAll(".todo");
+  divList = document.querySelectorAll(".todo");
   if (tdIndex !== 0) {
     const siblingTitle = currentTodoList[tdIndex - 1].title;
     divList.forEach((div) => {
@@ -166,6 +178,7 @@ function activateDeleteBtns() {
 }
 
 function activateCheckBoxes() {
+  checkBoxes = document.querySelectorAll(".td-status-check");
   checkBoxes.forEach((box) => box.addEventListener("click", (event) => toggleComplete(event)));
 }
 
@@ -191,7 +204,6 @@ function activateEditFormBtns() {
 }
 
 function toggleComplete(event) {
-  console.log("toggleComplete() triggered");
   const tdDiv = event.target.parentElement;
   const tdIndex = tdDiv.getAttribute("data-index");
   currentTodoList[tdIndex] = changeCompleteProperty(tdIndex, currentTodoList);
@@ -254,5 +266,10 @@ function refreshDisplay() {
     main.appendChild(generateTdListDisplay(content));
     addOverdueClass(currentTodoList);
   }
+  divList = document.querySelectorAll(".todo");
+  divList.forEach((div) => {
+    setTodoStatusClass(div, currentTodoList);
+  });
+  resetCheckboxes();
   activateAllBtns();
 }

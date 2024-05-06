@@ -9,10 +9,10 @@ Finished tasks:
 -2nd click: remove project buttons and return to default display
 -fix edit button function
 -fix delete button
+-Checkbox button and status: when page is refreshed, the tdObjects keep there status, but the div class is not updated. need to connect checkbox checked status to div class or object status
+-create method for seeing td description (hover or magnifying image/click for dialog box like in digital library)
 
 Next tasks:
--Checkbox button and status: when page is refreshed, the tdObjects keep there status, but the div class is not updated. need to connect checkbox checked status to div class or object status
 -Responsive design
 -have user set urgency date
 -have user select a default display
--create method for seeing td description (hover or magnifying image/click for dialog box like in digital library)
