@@ -1,6 +1,6 @@
 // Imports
 import _, { format, isBefore, addDays, subDays } from "date-fns";
-import { Project } from "./constructors";
+import { Project, dueDateFormat } from "./constructors";
 
 function deleteTodo(tdIndex, tdList) {
   tdList.splice(tdIndex, 1);
@@ -76,7 +76,14 @@ function createProjectTDLists(tdList) {
 }
 
 function createQuadLists(tdList) {
-  const urgencyDate = addDays(new Date(), 10);
+  const userDateSelector = document.getElementById("date-selector");
+  let urgencyDate;
+  if (userDateSelector) {
+    urgencyDate = dueDateFormat(userDateSelector.value);
+  } else {
+    console.log("Date selector element doesn't exist");
+    urgencyDate = addDays(new Date(), 10);
+  }
   const quad1 = tdList.filter((td) => td.priority === "High" && td.dueDate <= format(urgencyDate, "M-dd-y"));
   const quad2 = tdList.filter((td) => (td.priority === "High" && td.dueDate > format(urgencyDate, "M-dd-y")) || (td.priority === "Medium" && td.dueDate <= format(urgencyDate, "M-dd-y")));
   const quad3 = tdList.filter((td) => (td.priority === "Low" && td.dueDate <= format(urgencyDate, "M-dd-y")) || (td.priority === "Medium" && td.dueDate > format(urgencyDate, "M-dd-y")));

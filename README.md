@@ -14,5 +14,7 @@ Finished tasks:
 
 Next tasks:
 -Responsive design
+-check CSS for form-select buttons (keep down arrow image)
+-Change edit TD and new TD form inputs (priority = radio buttons/select), also for edit form, show current td values
 -have user set urgency date
 -have user select a default display

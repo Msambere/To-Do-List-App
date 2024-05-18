@@ -31,4 +31,4 @@ function dueDateFormat(dueDate) {
   return format(new Date(dueDate).toLocaleString(), "M-dd-y");
 }
 
-export { Todo, User, Project };
+export { Todo, User, Project, dueDateFormat };

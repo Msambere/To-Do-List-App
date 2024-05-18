@@ -2,7 +2,16 @@
 import { mainTodoList } from "./testTDList";
 import createSite from "./siteConstants";
 import { createDailyList, createThisWeekList, createTodayList, deleteTodo, addOverdueClass, createQuadLists, createProjectList } from "./listManagment";
-import { generateTdListDisplay, generateProjectHeader, createTodoDiv, setTodoStatusClass, generateTdQuadDisplay, generateProjectButtons, generateProjectOverviewsDisplay } from "./sitedynamic";
+import {
+  generateTdListDisplay,
+  generateProjectHeader,
+  createTodoDiv,
+  setTodoStatusClass,
+  generateTdQuadDisplay,
+  generateProjectButtons,
+  generateProjectOverviewsDisplay,
+  generateQuadDateSelector,
+} from "./sitedynamic";
 import { addNewTodo } from "./newTD";
 import { editTodoProperty, changeCompleteProperty } from "./editTD";
 
@@ -260,7 +269,14 @@ function refreshDisplay() {
   }
   main.appendChild(generateProjectHeader(header));
   if (main.classList.contains("quad")) {
+    main.appendChild(generateQuadDateSelector());
     main.appendChild(generateTdQuadDisplay(createQuadLists(content)));
+    const userDateBtn = document.getElementById("changeBtn");
+    userDateBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      console.log("change button clicked");
+      console.log(document.getElementById("date-selector").value);
+    });
     addOverdueClass(currentTodoList);
   } else {
     main.appendChild(generateTdListDisplay(content));

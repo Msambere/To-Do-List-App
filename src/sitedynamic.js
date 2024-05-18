@@ -16,6 +16,7 @@ function generateQuadDateSelector() {
   dateSelector.setAttribute("name", "date-selector");
   dateSelector.setAttribute("value", dueDateFormat(addDays(new Date(), 10)));
   const submitBtn = document.createElement("button");
+  submitBtn.setAttribute("id", "changeBtn");
   submitBtn.textContent = "Change";
   dateSelectorForm.appendChild(dateSelectorLabel);
   dateSelectorForm.appendChild(dateSelector);
